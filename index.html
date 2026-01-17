@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>闪闪的单词登山之旅- 完整版学习卡片</title>
+    <title>闪闪的单词登山之旅 - 完整版学习卡片</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,7 +14,7 @@
         }
         
         body {
-            background-color: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
+            background: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
             color: #333;
             line-height: 1.6;
             padding: 20px;
@@ -79,7 +79,7 @@
             gap: 15px;
             margin-bottom: 25px;
             padding: 18px;
-            background-color: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
+            background: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
             border-radius: 12px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
         }
@@ -93,7 +93,7 @@
         .search-box {
             display: flex;
             align-items: center;
-            background-color: background;
+            background:linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
             border: 2px solid #d8f3dc;
             border-radius: 25px;
             padding: 8px 15px;
@@ -440,7 +440,7 @@
             font-size: 1.1rem;
             position: sticky;
             top: 60px;
-            background-color: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
+            background: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
             z-index: 1;
         }
         
@@ -551,7 +551,7 @@
         .study-plan {
             margin-top: 15px;
             padding: 15px;
-            background-color: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
+            background: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
             border-radius: 10px;
             border: 1px solid #e9f5db;
             text-align: left;
@@ -621,13 +621,13 @@
             align-items: center;
             margin-bottom: 10px;
             padding: 8px 10px;
-            background-color: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
+            background: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
             border-radius: 8px;
             border: 1px solid #e9f5db;
         }
         
         .study-plan-item.today {
-            background-color: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
+            background: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
             border-color: #52b788;
             box-shadow: 0 0 0 2px rgba(82, 183, 136, 0.2);
         }
@@ -673,7 +673,7 @@
         .study-plan-stats {
             margin-top: 15px;
             padding: 10px;
-            background-color: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
+            background: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
             border-radius: 8px;
             font-size: 0.9rem;
             color: #2d6a4f;
@@ -898,7 +898,7 @@
         // 句子数据 - 包含所有100个句子的完整单词（基于原书内容）
         const sentences = [
             {
-               id: 1,
+              id: 1,
                 theme: "健康",
                 en: "It's time for us to have lunch.",
                 cn: "我们该吃午饭了。",
@@ -3162,7 +3162,6 @@
             }
         ];
 
-
         // DOM元素引用
         const cardsContainer = document.getElementById('cardsContainer');
         const listContainer = document.getElementById('listContainer');
@@ -3177,7 +3176,7 @@
         let currentView = 'cards';
         let searchTerm = '';
 
-        // 学习计划数据存储 - 使用数字作为键
+        // 学习计划数据存储
         const studyPlans = {};
 
         // 初始化
@@ -3210,11 +3209,17 @@
                     toggleView();
                 });
             });
+            
+            // 设置学习计划复选框事件委托
+            document.addEventListener('change', function(e) {
+                if (e.target && e.target.classList && e.target.classList.contains('study-plan-checkbox')) {
+                    handleCheckboxChange(e.target);
+                }
+            });
         }
 
         // 添加主题计数函数
         function updateThemeCount() {
-            // 计算不同主题的数量（排除"全部句子"）
             const themes = new Set();
             sentences.forEach(sentence => {
                 themes.add(sentence.theme);
@@ -3223,14 +3228,12 @@
             const themeCount = themes.size;
             document.getElementById('theme-count').textContent = themeCount;
             
-            // 计算主题归纳词汇总数
             let themeWordsCount = 0;
             sentences.forEach(sentence => {
                 themeWordsCount += sentence.themeWords.length;
             });
             document.getElementById('theme-words').textContent = themeWordsCount;
             
-            // 计算总单词数（更精确）
             let totalWordsCount = 0;
             sentences.forEach(sentence => {
                 totalWordsCount += sentence.coreWords.length + sentence.themeWords.length;
@@ -3245,6 +3248,7 @@
             const filteredSentences = getFilteredSentences();
             
             filteredSentences.forEach(sentence => {
+                const hasPlan = studyPlans[sentence.id];
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
@@ -3260,12 +3264,12 @@
                                     <div class="study-plan-title">
                                         <i class="fas fa-calendar-alt"></i> 学习计划
                                     </div>
-                                    <button class="${studyPlans[sentence.id] ? 'reset-study-btn' : 'start-study-btn'}" data-id="${sentence.id}" id="study-btn-${sentence.id}">
-                                        <i class="${studyPlans[sentence.id] ? 'fas fa-redo' : 'fas fa-play-circle'}"></i> ${studyPlans[sentence.id] ? '重新设置' : '开始学习'}
+                                    <button class="${hasPlan ? 'reset-study-btn' : 'start-study-btn'}" data-id="${sentence.id}" id="study-btn-${sentence.id}">
+                                        <i class="${hasPlan ? 'fas fa-redo' : 'fas fa-play-circle'}"></i> ${hasPlan ? '重新设置' : '开始学习'}
                                     </button>
                                 </div>
                                 <div class="study-plan-content" id="study-plan-${sentence.id}">
-                                    ${studyPlans[sentence.id] ? '' : '<p style="text-align: center; color: #888; padding: 20px;">点击"开始学习"按钮创建复习计划</p>'}
+                                    ${hasPlan ? generateStudyPlanHTML(sentence.id) : '<p style="text-align: center; color: #888; padding: 20px;">点击"开始学习"按钮创建复习计划</p>'}
                                 </div>
                             </div>
                             
@@ -3340,7 +3344,6 @@
                                 : sentence.en;
                         speakText(sentenceText);
                         
-                        // 添加播放动画
                         this.classList.add('playing');
                         setTimeout(() => {
                             this.classList.remove('playing');
@@ -3356,12 +3359,17 @@
                     
                     if (this.classList.contains('start-study-btn')) {
                         createStudyPlan(sentenceId);
+                        updateStudyPlanUI(sentenceId);
                         this.innerHTML = '<i class="fas fa-redo"></i> 重新设置';
                         this.classList.remove('start-study-btn');
                         this.classList.add('reset-study-btn');
                     } else if (this.classList.contains('reset-study-btn')) {
                         if (confirm('确定要重置学习计划吗？这将清除所有学习记录并重新开始。')) {
                             resetStudyPlan(sentenceId);
+                            const planContent = document.getElementById(`study-plan-${sentenceId}`);
+                            if (planContent) {
+                                planContent.innerHTML = '<p style="text-align: center; color: #888; padding: 20px;">点击"开始学习"按钮创建复习计划</p>';
+                            }
                             this.innerHTML = '<i class="fas fa-play-circle"></i> 开始学习';
                             this.classList.remove('reset-study-btn');
                             this.classList.add('start-study-btn');
@@ -3369,79 +3377,19 @@
                     }
                 });
                 
-                // 加载已有的学习计划
-                if (studyPlans[sentence.id]) {
-                    updateStudyPlanUI(sentence.id);
-                }
-                
                 cardsContainer.appendChild(card);
             });
         }
 
-        // 创建学习计划
-        function createStudyPlan(sentenceId) {
-            const startDate = new Date();
-            const dates = [
-                startDate,
-                addDays(startDate, 1),
-                addDays(startDate, 2),
-                addDays(startDate, 7),
-                addDays(startDate, 14),
-                addDays(startDate, 30),
-                addDays(startDate, 60)
-            ];
-            
-            // 格式化日期
-            const formattedDates = dates.map(date => {
-                return {
-                    date: date,
-                    formatted: formatDate(date),
-                    dayOfWeek: getDayOfWeek(date)
-                };
-            });
-            
-            // 保存学习计划 - 使用数字作为键
-            studyPlans[sentenceId] = {
-                startDate: startDate,
-                dates: formattedDates,
-                completed: new Array(7).fill(false),
-                completedCount: 0
-            };
-            
-            // 保存到本地存储
-            saveStudyPlans();
-            
-            // 更新UI
-            updateStudyPlanUI(sentenceId);
-        }
-
-        // 重置学习计划
-        function resetStudyPlan(sentenceId) {
-            // 从本地存储删除学习计划
-            delete studyPlans[sentenceId];
-            
-            // 保存到本地存储
-            saveStudyPlans();
-            
-            // 更新UI
-            const planContent = document.getElementById(`study-plan-${sentenceId}`);
-            if (planContent) {
-                planContent.innerHTML = '<p style="text-align: center; color: #888; padding: 20px;">点击"开始学习"按钮创建复习计划</p>';
-            }
-        }
-
-        // 更新学习计划UI
-        function updateStudyPlanUI(sentenceId) {
-            const planContent = document.getElementById(`study-plan-${sentenceId}`);
-            if (!planContent || !studyPlans[sentenceId]) return;
+        // 生成学习计划HTML
+        function generateStudyPlanHTML(sentenceId) {
+            const plan = studyPlans[sentenceId];
+            if (!plan) return '';
             
             const today = new Date();
             const todayStr = formatDate(today);
-            
-            const plan = studyPlans[sentenceId];
             let completedCount = 0;
             
-            // 计算已完成数量
             plan.completed.forEach(completed => {
                 if (completed) completedCount++;
             });
@@ -3471,7 +3419,6 @@
             });
             html += '</ul>';
             
-            // 添加学习统计
             html += `
                 <div class="study-plan-stats">
                     <div>开始日期: ${formatDate(plan.startDate)}</div>
@@ -3479,62 +3426,121 @@
                 </div>
             `;
             
-            planContent.innerHTML = html;
-            
-            // 添加复选框事件监听器
-            planContent.querySelectorAll('.study-plan-checkbox').forEach(checkbox => {
-                checkbox.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const sid = parseInt(this.getAttribute('data-id'));
-                    const idx = parseInt(this.getAttribute('data-index'));
-                    
-                    if (studyPlans[sid]) {
-                        studyPlans[sid].completed[idx] = this.checked;
-                        // 更新完成计数
-                        let count = 0;
-                        studyPlans[sid].completed.forEach(c => {
-                            if (c) count++;
-                        });
-                        studyPlans[sid].completedCount = count;
-                        
-                        saveStudyPlans();
-                        updateStudyPlanUI(sid);
-                    }
-                });
-            });
+            return html;
         }
 
-        // 加载所有学习计划
+        // 创建学习计划
+        function createStudyPlan(sentenceId) {
+            const startDate = new Date();
+            const dates = [
+                startDate,
+                addDays(startDate, 1),
+                addDays(startDate, 2),
+                addDays(startDate, 7),
+                addDays(startDate, 14),
+                addDays(startDate, 30),
+                addDays(startDate, 60)
+            ];
+            
+            const formattedDates = dates.map(date => {
+                return {
+                    date: date,
+                    formatted: formatDate(date),
+                    dayOfWeek: getDayOfWeek(date)
+                };
+            });
+            
+            studyPlans[sentenceId] = {
+                startDate: startDate,
+                dates: formattedDates,
+                completed: new Array(7).fill(false),
+                completedCount: 0
+            };
+            
+            saveStudyPlans();
+        }
+
+        // 重置学习计划
+        function resetStudyPlan(sentenceId) {
+            delete studyPlans[sentenceId];
+            saveStudyPlans();
+        }
+
+        // 更新学习计划UI
+        function updateStudyPlanUI(sentenceId) {
+            const planContent = document.getElementById(`study-plan-${sentenceId}`);
+            if (!planContent) return;
+            
+            if (!studyPlans[sentenceId]) {
+                planContent.innerHTML = '<p style="text-align: center; color: #888; padding: 20px;">点击"开始学习"按钮创建复习计划</p>';
+                return;
+            }
+            
+            planContent.innerHTML = generateStudyPlanHTML(sentenceId);
+        }
+
+        // 处理复选框变化
+        function handleCheckboxChange(checkbox) {
+            const sentenceId = parseInt(checkbox.getAttribute('data-id'));
+            const index = parseInt(checkbox.getAttribute('data-index'));
+            
+            if (studyPlans[sentenceId]) {
+                studyPlans[sentenceId].completed[index] = checkbox.checked;
+                
+                let count = 0;
+                studyPlans[sentenceId].completed.forEach(c => {
+                    if (c) count++;
+                });
+                studyPlans[sentenceId].completedCount = count;
+                
+                saveStudyPlans();
+                
+                // 更新状态文本
+                const statusElement = checkbox.closest('.study-plan-item').querySelector('.study-plan-status');
+                if (statusElement) {
+                    statusElement.textContent = checkbox.checked ? '已完成' : '待学习';
+                    statusElement.className = `study-plan-status ${checkbox.checked ? 'completed' : 'pending'}`;
+                }
+                
+                // 更新统计
+                const statsElement = checkbox.closest('.study-plan-content').querySelector('.study-plan-stats div:last-child');
+                if (statsElement) {
+                    statsElement.textContent = `已完成: ${count}/7`;
+                }
+            }
+        }
+
+        // 加载学习计划
         function loadStudyPlans() {
             const saved = localStorage.getItem('sentenceStudyPlans');
             if (saved) {
-                const parsed = JSON.parse(saved);
-                
-                // 转换日期字符串为Date对象，并确保键是数字
-                Object.keys(parsed).forEach(key => {
-                    const numKey = parseInt(key);
-                    if (parsed[key]) {
-                        parsed[numKey] = parsed[key];
-                        parsed[numKey].startDate = new Date(parsed[key].startDate);
-                        parsed[numKey].dates = parsed[key].dates.map(item => ({
-                            date: new Date(item.date),
-                            formatted: item.formatted,
-                            dayOfWeek: item.dayOfWeek
-                        }));
-                        // 删除字符串键
-                        if (key !== numKey.toString()) {
-                            delete parsed[key];
+                try {
+                    const parsed = JSON.parse(saved);
+                    
+                    Object.keys(parsed).forEach(key => {
+                        const planData = parsed[key];
+                        if (planData && planData.startDate && planData.dates) {
+                            studyPlans[key] = {
+                                startDate: new Date(planData.startDate),
+                                dates: planData.dates.map(item => ({
+                                    date: new Date(item.date),
+                                    formatted: item.formatted || formatDate(new Date(item.date)),
+                                    dayOfWeek: item.dayOfWeek || getDayOfWeek(new Date(item.date))
+                                })),
+                                completed: planData.completed || new Array(7).fill(false),
+                                completedCount: planData.completedCount || 0
+                            };
                         }
-                    }
-                });
-                
-                Object.assign(studyPlans, parsed);
+                    });
+                } catch (e) {
+                    console.error('加载学习计划失败:', e);
+                    localStorage.removeItem('sentenceStudyPlans');
+                }
             }
         }
 
         // 保存学习计划
         function saveStudyPlans() {
-            // 创建一个可序列化的副本
             const serializable = {};
             Object.keys(studyPlans).forEach(key => {
                 if (studyPlans[key]) {
@@ -3637,7 +3643,6 @@
                     </div>
                 `;
                 
-                // 添加发音事件
                 item.querySelectorAll('.audio-btn').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
@@ -3648,7 +3653,6 @@
                                 : sentence.en;
                         speakText(sentenceText);
                         
-                        // 添加播放动画
                         this.classList.add('playing');
                         setTimeout(() => {
                             this.classList.remove('playing');
@@ -3664,12 +3668,10 @@
         function getFilteredSentences() {
             let filtered = sentences;
             
-            // 按主题筛选
             if (currentTheme !== 'all') {
                 filtered = filtered.filter(sentence => sentence.theme === currentTheme);
             }
             
-            // 按搜索词筛选
             if (searchTerm) {
                 const term = searchTerm.toLowerCase();
                 filtered = filtered.filter(sentence => 
@@ -3718,7 +3720,6 @@
             const filteredSentences = getFilteredSentences();
             cardCount.textContent = filteredSentences.length;
             
-            // 计算过滤后的单词数
             let totalWords = 0;
             let themeWords = 0;
             
@@ -3731,11 +3732,9 @@
             
             wordCount.textContent = totalWords + "+";
 
-            // 如果正在查看特定主题，更新主题单词数
             if (currentTheme !== 'all') {
                 document.getElementById('theme-words').textContent = themeWords;
             } else {
-                // 恢复总主题单词数
                 let totalThemeWords = 0;
                 sentences.forEach(sentence => {
                     totalThemeWords += sentence.themeWords.length;
@@ -3756,7 +3755,7 @@
             }
         }
 
-        // 页面加载完成后初始化
+        // 初始化应用
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
