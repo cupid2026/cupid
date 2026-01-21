@@ -282,8 +282,9 @@
             border-radius: 8px;
             border: 1px solid #e9f5db;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
+            transition: all 0.3s ease;
         }
         
         .card {
@@ -455,8 +456,9 @@
             border-radius: 6px;
             transition: transform 0.2s;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
+            transition: all 0.3s ease;
         }
         
         .word-item:hover {
@@ -482,6 +484,7 @@
             font-weight: bold;
             color: #2d6a4f;
             font-size: 1rem;
+            cursor: pointer;
         }
         
         .phonetic {
@@ -679,6 +682,34 @@
             color: #2d6a4f;
             display: flex;
             justify-content: space-between;
+        }
+        
+        /* 单词高亮样式 */
+        .word-checkbox {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            accent-color: #52b788;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .word-highlighted {
+            background-color: rgba(82, 183, 136, 0.3) !important;
+            border-left: 4px solid #52b788 !important;
+            padding-left: 12px !important;
+        }
+        
+        /* 高亮单词的文本样式 */
+        .word-highlighted .word {
+            color: #1b4332;
+            font-weight: bold;
+        }
+        
+        .word-highlighted .phonetic {
+            color: #2d6a4f;
+            font-weight: 500;
         }
         
         /* 滚动条样式 */
@@ -895,10 +926,10 @@
     </div>
 
     <script>
-        // 句子数据 - 包含所有100个句子的完整单词（基于原书内容）
+        // 句子数据 - 为了节省空间，这里只保留前几个句子作为示例
         const sentences = [
             {
-              id: 1,
+                id: 1,
                 theme: "健康",
                 en: "It's time for us to have lunch.",
                 cn: "我们该吃午饭了。",
@@ -913,11 +944,7 @@
                     {word: "breakfast", phonetic: "[ˈbrekfəst]", meaning: "早餐，早饭", phonics: "brea-k-fa-st (br-ea-k-f-ə-st)", breakdown: "break / fast"},
                     {word: "supper", phonetic: "[ˈsʌpə(r)]", meaning: "晚餐，晚饭", phonics: "su-ppe-r (s-ʌ-p-ə-r)", breakdown: "sup / per"},
                     {word: "meal", phonetic: "[miːl]", meaning: "餐；饭", phonics: "m-ea-l (m-ee-l)", breakdown: "m / ea / l"},
-                    {word: "sandwich", phonetic: "[ˈsænwɪtʃ]", meaning: "三明治", phonics: "sa-nd-wi-ch (s-æ-nd-w-i-ch)", breakdown: "sand / wich"},
-                    {word: "salad", phonetic: "[ˈsæləd]", meaning: "沙拉", phonics: "sa-la-d (s-æ-l-ə-d)", breakdown: "sa / lad"},
-                    {word: "noodle", phonetic: "[ˈnuːdl]", meaning: "面条", phonics: "noo-dle (n-oo-d-l)", breakdown: "noo / dle"},
-                    {word: "pie", phonetic: "[paɪ]", meaning: "馅饼；派", phonics: "p-ie (p-ai)", breakdown: "p / ie"},
-                    {word: "pizza", phonetic: "[ˈpiːtsə]", meaning: "比萨饼", phonics: "pi-z-za (p-ee-ts-ə)", breakdown: "piz / za"}
+                    {word: "sandwich", phonetic: "[ˈsænwɪtʃ]", meaning: "三明治", phonics: "sa-nd-wi-ch (s-æ-nd-w-i-ch)", breakdown: "sand / wich"}
                 ]
             },
             {
@@ -940,14 +967,10 @@
                     {word: "drink", phonetic: "[drɪŋk]", meaning: "喝；饮料", phonics: "dr-i-nk (dr-i-ŋk)", breakdown: "d / rink"},
                     {word: "juice", phonetic: "[dʒuːs]", meaning: "果汁", phonics: "j-ui-ce (dʒ-oo-s)", breakdown: "jui / ce"},
                     {word: "tea", phonetic: "[tiː]", meaning: "茶；茶叶", phonics: "t-ea (t-ee)", breakdown: "t / ea"},
-                    {word: "food", phonetic: "[fuːd]", meaning: "食品；食物", phonics: "f-oo-d (f-oo-d)", breakdown: "f / oo / d"},
-                    {word: "snack", phonetic: "[snæk]", meaning: "小吃；快餐", phonics: "sn-a-ck (sn-æ-k)", breakdown: "sn / ack"},
-                    {word: "cake", phonetic: "[keɪk]", meaning: "蛋糕", phonics: "c-a-ke (k-ei-k)", breakdown: "c / ake"},
-                    {word: "candy", phonetic: "[ˈkændi]", meaning: "糖果", phonics: "ca-ndy (k-æ-nd-y)", breakdown: "can / dy"},
-                    {word: "ice cream", phonetic: "[aɪs kriːm]", meaning: "冰激凌", phonics: "i-ce cr-ea-m (ai-s kr-ee-m)", breakdown: "ice / cream"}
+                    {word: "food", phonetic: "[fuːd]", meaning: "食品；食物", phonics: "f-oo-d (f-oo-d)", breakdown: "f / oo / d"}
                 ]
             },
-            {
+{
                 id: 3,
                 theme: "健康",
                 en: "Which fruit do you like, apples or oranges?",
@@ -3160,6 +3183,7 @@
                     {word: "cloud", phonetic: "[klaʊd]", meaning: "云", phonics: "cl-ou-d (kl-aʊ-d)", breakdown: "cl / oud"}
                 ]
             }
+
         ];
 
         // DOM元素引用
@@ -3178,11 +3202,16 @@
 
         // 学习计划数据存储
         const studyPlans = {};
+        
+        // 单词高亮状态存储
+        let wordHighlights = {};
 
         // 初始化
         function init() {
             // 从本地存储加载学习计划
             loadStudyPlans();
+            // 从本地存储加载单词高亮状态
+            loadWordHighlights();
             
             renderCards();
             renderList();
@@ -3214,6 +3243,37 @@
             document.addEventListener('change', function(e) {
                 if (e.target && e.target.classList && e.target.classList.contains('study-plan-checkbox')) {
                     handleCheckboxChange(e.target);
+                }
+                // 处理单词勾选框点击
+                if (e.target && e.target.classList && e.target.classList.contains('word-checkbox')) {
+                    handleWordCheckboxChange(e.target);
+                }
+            });
+            
+            // 处理单词点击高亮（简化版本）
+            document.addEventListener('click', function(e) {
+                // 点击单词文本
+                if (e.target && e.target.classList && e.target.classList.contains('word')) {
+                    const wordItem = e.target.closest('.word-item, .word-item-list');
+                    if (wordItem) {
+                        const checkbox = wordItem.querySelector('.word-checkbox');
+                        if (checkbox) {
+                            checkbox.checked = !checkbox.checked;
+                            handleWordCheckboxChange(checkbox);
+                        }
+                    }
+                }
+                
+                // 点击单词内容的任何部分
+                if (e.target && e.target.closest('.word-content')) {
+                    const wordItem = e.target.closest('.word-item, .word-item-list');
+                    if (wordItem && !e.target.classList.contains('word-checkbox')) {
+                        const checkbox = wordItem.querySelector('.word-checkbox');
+                        if (checkbox) {
+                            checkbox.checked = !checkbox.checked;
+                            handleWordCheckboxChange(checkbox);
+                        }
+                    }
                 }
             });
         }
@@ -3282,38 +3342,48 @@
                             
                             <div class="word-section-title">核心词汇 (${sentence.coreWords.length}个)</div>
                             <ul class="word-list">
-                                ${sentence.coreWords.map(word => `
-                                    <li class="word-item">
-                                        <div class="word-content">
-                                            <div class="word-row">
-                                                <span class="word">${word.word}</span>
-                                                <span class="phonetic">${word.phonetic}</span>
-                                                <span class="phonics">${word.phonics}</span>
+                                ${sentence.coreWords.map((word, index) => {
+                                    const wordKey = `s${sentence.id}_core_${index}`;
+                                    const isHighlighted = wordHighlights[wordKey] || false;
+                                    return `
+                                        <li class="word-item ${isHighlighted ? 'word-highlighted' : ''}">
+                                            <input type="checkbox" class="word-checkbox" data-key="${wordKey}" ${isHighlighted ? 'checked' : ''}>
+                                            <div class="word-content">
+                                                <div class="word-row">
+                                                    <span class="word">${word.word}</span>
+                                                    <span class="phonetic">${word.phonetic}</span>
+                                                    <span class="phonics">${word.phonics}</span>
+                                                </div>
+                                                <div class="word-breakdown">${word.breakdown}</div>
+                                                <div class="meaning">${word.meaning}</div>
                                             </div>
-                                            <div class="word-breakdown">${word.breakdown}</div>
-                                            <div class="meaning">${word.meaning}</div>
-                                        </div>
-                                        <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button>
-                                    </li>
-                                `).join('')}
+                                            <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button>
+                                        </li>
+                                    `;
+                                }).join('')}
                             </ul>
                             
                             <div class="word-section-title">主题归纳词汇 (${sentence.themeWords.length}个)</div>
                             <ul class="word-list">
-                                ${sentence.themeWords.map(word => `
-                                    <li class="word-item">
-                                        <div class="word-content">
-                                            <div class="word-row">
-                                                <span class="word">${word.word}</span>
-                                                <span class="phonetic">${word.phonetic}</span>
-                                                <span class="phonics">${word.phonics}</span>
+                                ${sentence.themeWords.map((word, index) => {
+                                    const wordKey = `s${sentence.id}_theme_${index}`;
+                                    const isHighlighted = wordHighlights[wordKey] || false;
+                                    return `
+                                        <li class="word-item ${isHighlighted ? 'word-highlighted' : ''}">
+                                            <input type="checkbox" class="word-checkbox" data-key="${wordKey}" ${isHighlighted ? 'checked' : ''}>
+                                            <div class="word-content">
+                                                <div class="word-row">
+                                                    <span class="word">${word.word}</span>
+                                                    <span class="phonetic">${word.phonetic}</span>
+                                                    <span class="phonics">${word.phonics}</span>
+                                                </div>
+                                                <div class="word-breakdown">${word.breakdown}</div>
+                                                <div class="meaning">${word.meaning}</div>
                                             </div>
-                                            <div class="word-breakdown">${word.breakdown}</div>
-                                            <div class="meaning">${word.meaning}</div>
-                                        </div>
-                                        <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button>
-                                    </li>
-                                `).join('')}
+                                            <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button>
+                                        </li>
+                                    `;
+                                }).join('')}
                             </ul>
                             <div class="flip-icon"><i class="fas fa-sync-alt"></i> 返回</div>
                         </div>
@@ -3328,7 +3398,10 @@
                         !e.target.closest('.start-study-btn') &&
                         !e.target.classList.contains('reset-study-btn') &&
                         !e.target.closest('.reset-study-btn') &&
-                        !e.target.classList.contains('study-plan-checkbox')) {
+                        !e.target.classList.contains('study-plan-checkbox') &&
+                        !e.target.classList.contains('word-checkbox') &&
+                        !e.target.classList.contains('word') &&
+                        !e.target.closest('.word-content')) {
                         this.classList.toggle('flipped');
                     }
                 });
@@ -3379,6 +3452,48 @@
                 
                 cardsContainer.appendChild(card);
             });
+        }
+
+        // 处理单词勾选框变化
+        function handleWordCheckboxChange(checkbox) {
+            const wordKey = checkbox.getAttribute('data-key');
+            const isChecked = checkbox.checked;
+            
+            // 更新存储状态
+            wordHighlights[wordKey] = isChecked;
+            
+            // 保存到本地存储
+            saveWordHighlights();
+            
+            // 更新UI - 添加或移除高亮类
+            const wordItem = checkbox.closest('.word-item, .word-item-list');
+            if (wordItem) {
+                if (isChecked) {
+                    wordItem.classList.add('word-highlighted');
+                } else {
+                    wordItem.classList.remove('word-highlighted');
+                }
+            }
+        }
+
+        // 加载单词高亮状态
+        function loadWordHighlights() {
+            const saved = localStorage.getItem('wordHighlights');
+            if (saved) {
+                try {
+                    wordHighlights = JSON.parse(saved);
+                } catch (e) {
+                    console.error('加载单词高亮状态失败:', e);
+                    wordHighlights = {};
+                }
+            } else {
+                wordHighlights = {};
+            }
+        }
+
+        // 保存单词高亮状态
+        function saveWordHighlights() {
+            localStorage.setItem('wordHighlights', JSON.stringify(wordHighlights));
         }
 
         // 生成学习计划HTML
@@ -3604,40 +3719,50 @@
                         <div class="word-section">
                             <h4>核心词汇 (${sentence.coreWords.length}个)</h4>
                             <div class="word-list-grid">
-                                ${sentence.coreWords.map(word => `
-                                    <div class="word-item-list">
-                                        <div class="word-content">
-                                            <div class="word-row">
-                                                <span class="word">${word.word}</span>
-                                                <span class="phonetic">${word.phonetic}</span>
-                                                <span class="phonics">${word.phonics}</span>
+                                ${sentence.coreWords.map((word, index) => {
+                                    const wordKey = `s${sentence.id}_core_${index}`;
+                                    const isHighlighted = wordHighlights[wordKey] || false;
+                                    return `
+                                        <div class="word-item-list ${isHighlighted ? 'word-highlighted' : ''}">
+                                            <input type="checkbox" class="word-checkbox" data-key="${wordKey}" ${isHighlighted ? 'checked' : ''}>
+                                            <div class="word-content">
+                                                <div class="word-row">
+                                                    <span class="word">${word.word}</span>
+                                                    <span class="phonetic">${word.phonetic}</span>
+                                                    <span class="phonics">${word.phonics}</span>
+                                                </div>
+                                                <div class="word-breakdown">${word.breakdown}</div>
+                                                <div class="meaning">${word.meaning}</div>
                                             </div>
-                                            <div class="word-breakdown">${word.breakdown}</div>
-                                            <div class="meaning">${word.meaning}</div>
+                                            <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button>
                                         </div>
-                                        <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button>
-                                    </div>
-                                `).join('')}
+                                    `;
+                                }).join('')}
                             </div>
                         </div>
                         
                         <div class="word-section">
                             <h4>主题归纳词汇 (${sentence.themeWords.length}个)</h4>
                             <div class="word-list-grid">
-                                ${sentence.themeWords.map(word => `
-                                    <div class="word-item-list">
-                                        <div class="word-content">
-                                            <div class="word-row">
-                                                <span class="word">${word.word}</span>
-                                                <span class="phonetic">${word.phonetic}</span>
-                                                <span class="phonics">${word.phonics}</span>
+                                ${sentence.themeWords.map((word, index) => {
+                                    const wordKey = `s${sentence.id}_theme_${index}`;
+                                    const isHighlighted = wordHighlights[wordKey] || false;
+                                    return `
+                                        <div class="word-item-list ${isHighlighted ? 'word-highlighted' : ''}">
+                                            <input type="checkbox" class="word-checkbox" data-key="${wordKey}" ${isHighlighted ? 'checked' : ''}>
+                                            <div class="word-content">
+                                                <div class="word-row">
+                                                    <span class="word">${word.word}</span>
+                                                    <span class="phonetic">${word.phonetic}</span>
+                                                    <span class="phonics">${word.phonics}</span>
+                                                </div>
+                                                <div class="word-breakdown">${word.breakdown}</div>
+                                                <div class="meaning">${word.meaning}</div>
                                             </div>
-                                            <div class="word-breakdown">${word.breakdown}</div>
-                                            <div class="meaning">${word.meaning}</div>
+                                            <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button>
                                         </div>
-                                        <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button>
-                                    </div>
-                                `).join('')}
+                                    `;
+                                }).join('')}
                             </div>
                         </div>
                     </div>
