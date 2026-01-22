@@ -45,6 +45,26 @@
             font-weight: 500;
         }
         
+        .achievement-text {
+            color: #a55eea;
+            font-size: 1.0rem;
+            font-weight: bold;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 3px 8px rgba(230, 57, 70, 0.2);
+            border: 2px solid #ffccd5;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        
         .header-stats {
             display: flex;
             justify-content: center;
@@ -288,7 +308,7 @@
         }
         
         .card {
-            height: 620px;
+            height: 720px;
             perspective: 1000px;
             cursor: pointer;
         }
@@ -333,6 +353,7 @@
             color: #1b4332;
             transform: rotateY(180deg);
             text-align: left;
+            padding: 20px 25px;
         }
         
         .sentence-num {
@@ -712,6 +733,161 @@
             font-weight: 500;
         }
         
+        /* 单词阶梯样式 - 水平方向，置于顶部 */
+        .word-ladder {
+            margin: 10px 0 25px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.95) 100%);
+            border-radius: 10px;
+            border: 2px solid #d8f3dc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .ladder-title {
+            font-size: 1.1rem;
+            color: #2d6a4f;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d8f3dc;
+        }
+        
+        .ladder-progress {
+            font-size: 1rem;
+            color: #40916c;
+            font-weight: bold;
+            background-color: rgba(233, 245, 219, 0.8);
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+        
+        .ladder-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 5px;
+        }
+        
+        .ladder-steps {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: space-between;
+            width: 100%;
+            height: 130px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .ladder-step {
+            width: 9%;
+            background-color: #e9ecef;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.5s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            min-height: 20px;
+        }
+        
+        .ladder-step:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            transition: height 0.8s ease;
+            z-index: 1;
+        }
+        
+        .ladder-step.active:before {
+            height: 100%;
+        }
+        
+        .ladder-step-text {
+            position: relative;
+            z-index: 2;
+            padding: 5px 0;
+            width: 100%;
+            font-size: 0.75rem;
+        }
+        
+        /* 不同阶梯高度 */
+        .ladder-step.step-1 { height: 25px; }
+        .ladder-step.step-2 { height: 35px; }
+        .ladder-step.step-3 { height: 45px; }
+        .ladder-step.step-4 { height: 55px; }
+        .ladder-step.step-5 { height: 65px; }
+        .ladder-step.step-6 { height: 75px; }
+        .ladder-step.step-7 { height: 85px; }
+        .ladder-step.step-8 { height: 95px; }
+        .ladder-step.step-9 { height: 105px; }
+        .ladder-step.step-10 { height: 120px; }
+        
+        /* 随机颜色类 */
+        .color-1:before { background: linear-gradient(to top, #ff6b6b, #ff8e8e); }
+        .color-2:before { background: linear-gradient(to top, #4ecdc4, #6ee7d9); }
+        .color-3:before { background: linear-gradient(to top, #ffd166, #ffde8a); }
+        .color-4:before { background: linear-gradient(to top, #06d6a0, #3ce8b8); }
+        .color-5:before { background: linear-gradient(to top, #118ab2, #1aa6d6); }
+        .color-6:before { background: linear-gradient(to top, #ef476f, #f56a8a); }
+        .color-7:before { background: linear-gradient(to top, #7209b7, #9d4edd); }
+        .color-8:before { background: linear-gradient(to top, #f3722c, #f8965c); }
+        .color-9:before { background: linear-gradient(to top, #90be6d, #a8d68c); }
+        .color-10:before { background: linear-gradient(to top, #43aa8b, #5dc9a4); }
+        
+        .ladder-step.active {
+            color: white;
+            font-weight: bold;
+        }
+        
+        .ladder-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 5px;
+        }
+        
+        .ladder-label {
+            font-size: 0.7rem;
+            color: #666;
+            width: 9%;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .ladder-message {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+            padding: 8px 15px;
+            background-color: rgba(233, 245, 219, 0.7);
+            border-radius: 8px;
+            border-left: 3px solid #52b788;
+        }
+        
+        .ladder-achievement {
+            font-weight: 600;
+            color: #2d6a4f;
+        }
+        
+        /* 调整卡片背面布局，为阶梯留出空间 */
+        .card-back {
+            padding: 20px 25px;
+        }
+        
         /* 滚动条样式 */
         .card-front::-webkit-scrollbar,
         .card-back::-webkit-scrollbar {
@@ -736,14 +912,14 @@
         }
         
         /* 发音动画 */
-        @keyframes pulse {
+        @keyframes pulse-audio {
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
         
         .audio-btn.playing {
-            animation: pulse 0.5s infinite;
+            animation: pulse-audio 0.5s infinite;
             background-color: #e63946;
         }
         
@@ -755,6 +931,10 @@
             
             .word-sections {
                 grid-template-columns: 1fr;
+            }
+            
+            .ladder-step {
+                font-size: 0.7rem;
             }
         }
         
@@ -776,8 +956,19 @@
             }
             
             .card {
-                height: 680px;
+                height: 750px;
             }
+            
+            .ladder-step.step-1 { height: 25px; }
+            .ladder-step.step-2 { height: 35px; }
+            .ladder-step.step-3 { height: 45px; }
+            .ladder-step.step-4 { height: 55px; }
+            .ladder-step.step-5 { height: 65px; }
+            .ladder-step.step-6 { height: 75px; }
+            .ladder-step.step-7 { height: 85px; }
+            .ladder-step.step-8 { height: 95px; }
+            .ladder-step.step-9 { height: 105px; }
+            .ladder-step.step-10 { height: 115px; }
         }
         
         @media (max-width: 768px) {
@@ -794,7 +985,7 @@
             }
             
             .card {
-                height: 700px;
+                height: 780px;
             }
             
             .header-stats {
@@ -819,6 +1010,30 @@
                 position: relative;
                 top: 0;
             }
+            
+            .ladder-step {
+                font-size: 0.65rem;
+            }
+            
+            .ladder-step.step-1 { height: 20px; }
+            .ladder-step.step-2 { height: 30px; }
+            .ladder-step.step-3 { height: 40px; }
+            .ladder-step.step-4 { height: 50px; }
+            .ladder-step.step-5 { height: 60px; }
+            .ladder-step.step-6 { height: 70px; }
+            .ladder-step.step-7 { height: 80px; }
+            .ladder-step.step-8 { height: 90px; }
+            .ladder-step.step-9 { height: 100px; }
+            .ladder-step.step-10 { height: 110px; }
+            
+            .ladder-steps {
+                height: 110px;
+            }
+            
+            .achievement-text {
+                font-size: 1.1rem;
+                padding: 6px 12px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -827,7 +1042,7 @@
             }
             
             .card {
-                height: 720px;
+                height: 800px;
             }
             
             .header-stats {
@@ -838,6 +1053,25 @@
             .search-box {
                 max-width: 100%;
             }
+            
+            .ladder-step {
+                font-size: 0.6rem;
+                width: 8.5%;
+            }
+            
+            .ladder-label {
+                width: 8.5%;
+                font-size: 0.6rem;
+            }
+            
+            .ladder-steps {
+                height: 100px;
+            }
+            
+            .achievement-text {
+                font-size: 1rem;
+                padding: 5px 10px;
+            }
         }
     </style>
 </head>
@@ -846,6 +1080,9 @@
         <div class="header-content">
             <h1><i class="fas fa-language"></i> 闪闪宝贝的单词登山之旅</h1>
             <p>学习就像爬山，有的路段好走，有的路段崎岖不平，将学习过程中每一个困难当成一个石梯，遥远的山峰也尽在脚下。</p>
+            <div class="achievement-text" id="achievementText">
+                小宝贝你已登到第<span id="totalCheckedWords">0</span>个阶梯
+            </div>
             
             <div class="header-stats">
                 <div class="stat-item">
@@ -863,6 +1100,10 @@
                 <div class="stat-item">
                      <div class="stat-value" id="theme-words">138</div>
                     <div class="stat-label">主题归纳</div>
+                </div>
+                <div class="stat-item">
+                     <div class="stat-value" id="checked-words">0</div>
+                    <div class="stat-label">已掌握单词</div>
                 </div>
             </div>
         </div>
@@ -926,7 +1167,7 @@
     </div>
 
     <script>
-        // 句子数据 - 为了节省空间，这里只保留前几个句子作为示例
+        // 句子数据
         const sentences = [
             {
                 id: 1,
@@ -3170,8 +3411,8 @@
                 coreWords: [
                     {word: "travel", phonetic: "[ˈtrævl]", meaning: "旅游；旅行；行进", phonics: "tra-ve-l (tr-æ-v-ə-l)", breakdown: "trav / el"},
                     {word: "Mars", phonetic: "[mɑːz]", meaning: "火星", phonics: "M-a-r-s (m-ɑː-z)", breakdown: "Mar / s"},
-                    {word: "Time Chair", phonetic: "[taɪm tʃeə(r)]", meaning: "时光椅", phonics: "T-i-me Ch-air", breakdown: "Time / Chair"}
-                ],
+                    {word: "Time Chair", phonetic: "[taɪm tʃeə(r)]", meaning: "时光椅", phonics: "T-i-me Ch-air", breakdown: "Time / Chair"},
+         ],
                 themeWords: [
                     {word: "planet", phonetic: "[ˈplænɪt]", meaning: "行星", phonics: "pla-ne-t (pl-æ-n-i-t)", breakdown: "plan / et"},
                     {word: "sun", phonetic: "[sʌn]", meaning: "太阳", phonics: "s-u-n (s-ʌ-n)", breakdown: "s / un"},
@@ -3186,6 +3427,7 @@
 
         ];
 
+
         // DOM元素引用
         const cardsContainer = document.getElementById('cardsContainer');
         const listContainer = document.getElementById('listContainer');
@@ -3194,6 +3436,9 @@
         const viewButtons = document.querySelectorAll('.view-btn');
         const cardCount = document.getElementById('card-count');
         const wordCount = document.getElementById('word-count');
+        const totalCheckedWordsElement = document.getElementById('totalCheckedWords');
+        const achievementText = document.getElementById('achievementText');
+        const checkedWordsStat = document.getElementById('checked-words');
 
         // 当前状态
         let currentTheme = 'all';
@@ -3206,6 +3451,175 @@
         // 单词高亮状态存储
         let wordHighlights = {};
 
+        // 计算已勾选单词总数
+        function calculateTotalCheckedWords() {
+            let totalChecked = 0;
+            
+            // 遍历所有句子
+            sentences.forEach(sentence => {
+                // 统计核心词汇勾选情况
+                for (let i = 0; i < sentence.coreWords.length; i++) {
+                    const wordKey = `s${sentence.id}_core_${i}`;
+                    if (wordHighlights[wordKey]) {
+                        totalChecked++;
+                    }
+                }
+                
+                // 统计主题词汇勾选情况
+                for (let i = 0; i < sentence.themeWords.length; i++) {
+                    const wordKey = `s${sentence.id}_theme_${i}`;
+                    if (wordHighlights[wordKey]) {
+                        totalChecked++;
+                    }
+                }
+            });
+            
+            return totalChecked;
+        }
+        
+        // 更新总勾选单词数显示
+        function updateTotalCheckedWords() {
+            const totalChecked = calculateTotalCheckedWords();
+            totalCheckedWordsElement.textContent = totalChecked;
+            checkedWordsStat.textContent = totalChecked;
+            
+            // 根据勾选数量更新鼓励语句
+            updateEncouragementText(totalChecked);
+        }
+        
+        // 根据勾选数量更新鼓励语句
+        function updateEncouragementText(totalChecked) {
+            let encouragementText = "";
+            
+            if (totalChecked === 0) {
+                encouragementText = "小宝贝，开始你的登山之旅吧！";
+            } else if (totalChecked < 10) {
+                encouragementText = "小宝贝你已登到第" + totalChecked + "个阶梯，好的开始是成功的一半！";
+            } else if (totalChecked < 50) {
+                encouragementText = "小宝贝你已登到第" + totalChecked + "个阶梯，继续加油！";
+            } else if (totalChecked < 100) {
+                encouragementText = "小宝贝你已登到第" + totalChecked + "个阶梯，你已经走过了很长的路！";
+            } else if (totalChecked < 200) {
+                encouragementText = "小宝贝你已登到第" + totalChecked + "个阶梯，你真是一个坚持的小登山家！";
+            } else if (totalChecked < 500) {
+                encouragementText = "小宝贝你已登到第" + totalChecked + "个阶梯，你已经看到了半山腰的风景！";
+            } else if (totalChecked < 1000) {
+                encouragementText = "小宝贝你已登到第" + totalChecked + "个阶梯，山顶的风景正在向你招手！";
+            } else {
+                encouragementText = "小宝贝你已登到第" + totalChecked + "个阶梯，你就是一个真正的单词登山冠军！";
+            }
+            
+            achievementText.innerHTML = encouragementText;
+        }
+
+        // 新增函数：生成随机颜色类
+        function getRandomColorClass() {
+            const colorClasses = ['color-1', 'color-2', 'color-3', 'color-4', 'color-5', 
+                                 'color-6', 'color-7', 'color-8', 'color-9', 'color-10'];
+            return colorClasses[Math.floor(Math.random() * colorClasses.length)];
+        }
+        
+        // 新增函数：创建单词阶梯（水平方向）
+        function createWordLadder(sentenceId, coreWordsCount, themeWordsCount) {
+            // 计算总单词数
+            const totalWords = coreWordsCount + themeWordsCount;
+            
+            // 计算已勾选的单词数
+            let checkedCount = 0;
+            
+            // 统计核心词汇勾选情况
+            for (let i = 0; i < coreWordsCount; i++) {
+                const wordKey = `s${sentenceId}_core_${i}`;
+                if (wordHighlights[wordKey]) {
+                    checkedCount++;
+                }
+            }
+            
+            // 统计主题词汇勾选情况
+            for (let i = 0; i < themeWordsCount; i++) {
+                const wordKey = `s${sentenceId}_theme_${i}`;
+                if (wordHighlights[wordKey]) {
+                    checkedCount++;
+                }
+            }
+            
+            // 计算完成比例
+            const progressPercentage = totalWords > 0 ? (checkedCount / totalWords) * 100 : 0;
+            
+            // 生成随机颜色（每个卡片使用相同的随机颜色）
+            let colorClass = localStorage.getItem(`ladder-color-${sentenceId}`);
+            if (!colorClass) {
+                colorClass = getRandomColorClass();
+                localStorage.setItem(`ladder-color-${sentenceId}`, colorClass);
+            }
+            
+            // 确定阶梯数量（最大10级，根据单词数量调整）
+            const ladderSteps = Math.min(totalWords, 10);
+            
+            // 计算点亮多少级阶梯
+            const activeSteps = Math.ceil((checkedCount / totalWords) * ladderSteps);
+            
+            // 生成阶梯HTML
+            let ladderHTML = `
+                <div class="word-ladder">
+                    <div class="ladder-title">
+                        <span><i class="fas fa-mountain"></i> 单词登山阶梯</span>
+                        <span class="ladder-progress">${checkedCount}/${totalWords} (${progressPercentage.toFixed(0)}%)</span>
+                    </div>
+                    <div class="ladder-container">
+                        <div class="ladder-steps">
+            `;
+            
+            // 从左向右生成阶梯
+            for (let i = 1; i <= ladderSteps; i++) {
+                const stepClass = `ladder-step step-${i} ${colorClass} ${i <= activeSteps ? 'active' : ''}`;
+                const stepText = i === ladderSteps ? "山顶" : `第${i}级`;
+                
+                ladderHTML += `
+                    <div class="${stepClass}">
+                        <span class="ladder-step-text">${stepText}</span>
+                    </div>
+                `;
+            }
+            
+            ladderHTML += `
+                        </div>
+                        <div class="ladder-labels">
+            `;
+            
+            // 添加底部标签
+            for (let i = 1; i <= ladderSteps; i++) {
+                const labelText = i === ladderSteps ? "山顶" : `L${i}`;
+                ladderHTML += `<div class="ladder-label">${labelText}</div>`;
+            }
+            
+            ladderHTML += `
+                        </div>
+                        <div class="ladder-message">
+            `;
+            
+            // 根据完成情况添加鼓励消息
+            if (checkedCount === 0) {
+                ladderHTML += `开始攀登吧！每记住一个单词，就点亮一级阶梯。`;
+            } else if (checkedCount === totalWords) {
+                ladderHTML += `<span class="ladder-achievement">恭喜登顶！</span> 你已掌握本卡片所有单词！`;
+            } else if (progressPercentage >= 70) {
+                ladderHTML += `<span class="ladder-achievement">快要到山顶了！</span> 还差${totalWords - checkedCount}个单词就全部掌握了！`;
+            } else if (progressPercentage >= 40) {
+                ladderHTML += `<span class="ladder-achievement">继续加油！</span> 你已经掌握了大部分单词，坚持就是胜利！`;
+            } else {
+                ladderHTML += `<span class="ladder-achievement">稳步前进！</span> 你已经记住了${checkedCount}个单词，继续加油！`;
+            }
+            
+            ladderHTML += `
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return ladderHTML;
+        }
+
         // 初始化
         function init() {
             // 从本地存储加载学习计划
@@ -3217,6 +3631,9 @@
             renderList();
             updateCounters();
             updateThemeCount();
+            
+            // 初始化总勾选单词数显示
+            updateTotalCheckedWords();
             
             // 设置事件监听器
             searchInput.addEventListener('input', handleSearch);
@@ -3278,27 +3695,134 @@
             });
         }
 
-        // 添加主题计数函数
-        function updateThemeCount() {
-            const themes = new Set();
-            sentences.forEach(sentence => {
-                themes.add(sentence.theme);
-            });
+        // 处理单词勾选框变化
+        function handleWordCheckboxChange(checkbox) {
+            const wordKey = checkbox.getAttribute('data-key');
+            const isChecked = checkbox.checked;
             
-            const themeCount = themes.size;
-            document.getElementById('theme-count').textContent = themeCount;
+            // 更新存储状态
+            wordHighlights[wordKey] = isChecked;
             
-            let themeWordsCount = 0;
-            sentences.forEach(sentence => {
-                themeWordsCount += sentence.themeWords.length;
-            });
-            document.getElementById('theme-words').textContent = themeWordsCount;
+            // 保存到本地存储
+            saveWordHighlights();
             
-            let totalWordsCount = 0;
-            sentences.forEach(sentence => {
-                totalWordsCount += sentence.coreWords.length + sentence.themeWords.length;
-            });
-            document.getElementById('total-words').textContent = totalWordsCount + "+";
+            // 更新UI - 添加或移除高亮类
+            const wordItem = checkbox.closest('.word-item, .word-item-list');
+            if (wordItem) {
+                if (isChecked) {
+                    wordItem.classList.add('word-highlighted');
+                } else {
+                    wordItem.classList.remove('word-highlighted');
+                }
+            }
+            
+            // 获取句子ID并更新阶梯
+            const keyParts = wordKey.split('_');
+            if (keyParts.length >= 2) {
+                const sentenceId = parseInt(keyParts[0].substring(1));
+                updateWordLadder(sentenceId);
+            }
+            
+            // 更新总勾选单词数显示
+            updateTotalCheckedWords();
+        }
+        
+        // 新增函数：更新单词阶梯
+        function updateWordLadder(sentenceId) {
+            // 找到对应的句子
+            const sentence = sentences.find(s => s.id === sentenceId);
+            if (!sentence) return;
+            
+            // 计算总单词数
+            const totalWords = sentence.coreWords.length + sentence.themeWords.length;
+            
+            // 计算已勾选的单词数
+            let checkedCount = 0;
+            
+            // 统计核心词汇勾选情况
+            for (let i = 0; i < sentence.coreWords.length; i++) {
+                const wordKey = `s${sentenceId}_core_${i}`;
+                if (wordHighlights[wordKey]) {
+                    checkedCount++;
+                }
+            }
+            
+            // 统计主题词汇勾选情况
+            for (let i = 0; i < sentence.themeWords.length; i++) {
+                const wordKey = `s${sentenceId}_theme_${i}`;
+                if (wordHighlights[wordKey]) {
+                    checkedCount++;
+                }
+            }
+            
+            // 计算完成比例
+            const progressPercentage = totalWords > 0 ? (checkedCount / totalWords) * 100 : 0;
+            
+            // 确定阶梯数量
+            const ladderSteps = Math.min(totalWords, 10);
+            
+            // 计算点亮多少级阶梯
+            const activeSteps = Math.ceil((checkedCount / totalWords) * ladderSteps);
+            
+            // 获取卡片背面的阶梯容器
+            const ladderContainer = document.querySelector(`[data-id="${sentenceId}"] .word-ladder`);
+            if (ladderContainer) {
+                // 更新进度文本
+                const progressElement = ladderContainer.querySelector('.ladder-progress');
+                if (progressElement) {
+                    progressElement.textContent = `${checkedCount}/${totalWords} (${progressPercentage.toFixed(0)}%)`;
+                }
+                
+                // 更新阶梯状态
+                const steps = ladderContainer.querySelectorAll('.ladder-step');
+                steps.forEach((step, index) => {
+                    if (index + 1 <= activeSteps) {
+                        step.classList.add('active');
+                    } else {
+                        step.classList.remove('active');
+                    }
+                });
+                
+                // 更新鼓励消息
+                const messageElement = ladderContainer.querySelector('.ladder-message');
+                if (messageElement) {
+                    let message = '';
+                    
+                    if (checkedCount === 0) {
+                        message = `开始攀登吧！每记住一个单词，就点亮一级阶梯。`;
+                    } else if (checkedCount === totalWords) {
+                        message = `<span class="ladder-achievement">恭喜登顶！</span> 你已掌握本卡片所有单词！`;
+                    } else if (progressPercentage >= 70) {
+                        message = `<span class="ladder-achievement">快要到山顶了！</span> 还差${totalWords - checkedCount}个单词就全部掌握了！`;
+                    } else if (progressPercentage >= 40) {
+                        message = `<span class="ladder-achievement">继续加油！</span> 你已经掌握了大部分单词，坚持就是胜利！`;
+                    } else {
+                        message = `<span class="ladder-achievement">稳步前进！</span> 你已经记住了${checkedCount}个单词，继续加油！`;
+                    }
+                    
+                    messageElement.innerHTML = message;
+                }
+            }
+        }
+
+        // 加载单词高亮状态
+        function loadWordHighlights() {
+            const saved = localStorage.getItem('wordHighlights');
+            if (saved) {
+                try {
+                    wordHighlights = JSON.parse(saved);
+                } catch (e) {
+                    console.error('加载单词高亮状态失败:', e);
+                    wordHighlights = {};
+                }
+            } else {
+                wordHighlights = {};
+            }
+        }
+
+        // 保存单词高亮状态
+        function saveWordHighlights() {
+            localStorage.setItem('wordHighlights', JSON.stringify(wordHighlights));
         }
 
         // 渲染卡片视图
@@ -3311,6 +3835,11 @@
                 const hasPlan = studyPlans[sentence.id];
                 const card = document.createElement('div');
                 card.className = 'card';
+                card.setAttribute('data-id', sentence.id);
+                
+                // 创建单词阶梯
+                const wordLadderHTML = createWordLadder(sentence.id, sentence.coreWords.length, sentence.themeWords.length);
+                
                 card.innerHTML = `
                     <div class="card-inner">
                         <div class="card-front">
@@ -3336,9 +3865,10 @@
                             <div class="flip-icon"><i class="fas fa-sync-alt"></i> 翻转</div>
                         </div>
                         <div class="card-back">
-                            <h3> ${sentence.id} <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button></h3>
-                            <div class="sentence-en" style="text-align: left; font-size: 1.2rem; margin: 10px 0;">${sentence.en}</div>
-                            <div class="sentence-cn" style="text-align: left; margin-bottom: 15px;">${sentence.cn}</div>
+                            <h3>单词学习卡 #${sentence.id} <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button></h3>
+                            
+                            <!-- 添加单词阶梯 - 放在顶部 -->
+                            ${wordLadderHTML}
                             
                             <div class="word-section-title">核心词汇 (${sentence.coreWords.length}个)</div>
                             <ul class="word-list">
@@ -3426,77 +3956,59 @@
                 
                 // 添加开始学习/重新设置按钮事件
                 const studyBtn = card.querySelector(`#study-btn-${sentence.id}`);
-                studyBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const sentenceId = parseInt(this.getAttribute('data-id'));
-                    
-                    if (this.classList.contains('start-study-btn')) {
-                        createStudyPlan(sentenceId);
-                        updateStudyPlanUI(sentenceId);
-                        this.innerHTML = '<i class="fas fa-redo"></i> 重新设置';
-                        this.classList.remove('start-study-btn');
-                        this.classList.add('reset-study-btn');
-                    } else if (this.classList.contains('reset-study-btn')) {
-                        if (confirm('确定要重置学习计划吗？这将清除所有学习记录并重新开始。')) {
-                            resetStudyPlan(sentenceId);
-                            const planContent = document.getElementById(`study-plan-${sentenceId}`);
-                            if (planContent) {
-                                planContent.innerHTML = '<p style="text-align: center; color: #888; padding: 20px;">点击"开始学习"按钮创建复习计划</p>';
+                if (studyBtn) {
+                    studyBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const sentenceId = parseInt(this.getAttribute('data-id'));
+                        
+                        if (this.classList.contains('start-study-btn')) {
+                            createStudyPlan(sentenceId);
+                            updateStudyPlanUI(sentenceId);
+                            this.innerHTML = '<i class="fas fa-redo"></i> 重新设置';
+                            this.classList.remove('start-study-btn');
+                            this.classList.add('reset-study-btn');
+                        } else if (this.classList.contains('reset-study-btn')) {
+                            if (confirm('确定要重置学习计划吗？这将清除所有学习记录并重新开始。')) {
+                                resetStudyPlan(sentenceId);
+                                const planContent = document.getElementById(`study-plan-${sentenceId}`);
+                                if (planContent) {
+                                    planContent.innerHTML = '<p style="text-align: center; color: #888; padding: 20px;">点击"开始学习"按钮创建复习计划</p>';
+                                }
+                                this.innerHTML = '<i class="fas fa-play-circle"></i> 开始学习';
+                                this.classList.remove('reset-study-btn');
+                                this.classList.add('start-study-btn');
                             }
-                            this.innerHTML = '<i class="fas fa-play-circle"></i> 开始学习';
-                            this.classList.remove('reset-study-btn');
-                            this.classList.add('start-study-btn');
                         }
-                    }
-                });
+                    });
+                }
                 
                 cardsContainer.appendChild(card);
             });
         }
 
-        // 处理单词勾选框变化
-        function handleWordCheckboxChange(checkbox) {
-            const wordKey = checkbox.getAttribute('data-key');
-            const isChecked = checkbox.checked;
+        // 以下是原有函数的实现，保持不变
+        function updateThemeCount() {
+            const themes = new Set();
+            sentences.forEach(sentence => {
+                themes.add(sentence.theme);
+            });
             
-            // 更新存储状态
-            wordHighlights[wordKey] = isChecked;
+            const themeCount = themes.size;
+            document.getElementById('theme-count').textContent = themeCount;
             
-            // 保存到本地存储
-            saveWordHighlights();
+            let themeWordsCount = 0;
+            sentences.forEach(sentence => {
+                themeWordsCount += sentence.themeWords.length;
+            });
+            document.getElementById('theme-words').textContent = themeWordsCount;
             
-            // 更新UI - 添加或移除高亮类
-            const wordItem = checkbox.closest('.word-item, .word-item-list');
-            if (wordItem) {
-                if (isChecked) {
-                    wordItem.classList.add('word-highlighted');
-                } else {
-                    wordItem.classList.remove('word-highlighted');
-                }
-            }
+            let totalWordsCount = 0;
+            sentences.forEach(sentence => {
+                totalWordsCount += sentence.coreWords.length + sentence.themeWords.length;
+            });
+            document.getElementById('total-words').textContent = totalWordsCount + "+";
         }
-
-        // 加载单词高亮状态
-        function loadWordHighlights() {
-            const saved = localStorage.getItem('wordHighlights');
-            if (saved) {
-                try {
-                    wordHighlights = JSON.parse(saved);
-                } catch (e) {
-                    console.error('加载单词高亮状态失败:', e);
-                    wordHighlights = {};
-                }
-            } else {
-                wordHighlights = {};
-            }
-        }
-
-        // 保存单词高亮状态
-        function saveWordHighlights() {
-            localStorage.setItem('wordHighlights', JSON.stringify(wordHighlights));
-        }
-
-        // 生成学习计划HTML
+        
         function generateStudyPlanHTML(sentenceId) {
             const plan = studyPlans[sentenceId];
             if (!plan) return '';
@@ -3543,8 +4055,7 @@
             
             return html;
         }
-
-        // 创建学习计划
+        
         function createStudyPlan(sentenceId) {
             const startDate = new Date();
             const dates = [
@@ -3574,14 +4085,12 @@
             
             saveStudyPlans();
         }
-
-        // 重置学习计划
+        
         function resetStudyPlan(sentenceId) {
             delete studyPlans[sentenceId];
             saveStudyPlans();
         }
-
-        // 更新学习计划UI
+        
         function updateStudyPlanUI(sentenceId) {
             const planContent = document.getElementById(`study-plan-${sentenceId}`);
             if (!planContent) return;
@@ -3593,8 +4102,7 @@
             
             planContent.innerHTML = generateStudyPlanHTML(sentenceId);
         }
-
-        // 处理复选框变化
+        
         function handleCheckboxChange(checkbox) {
             const sentenceId = parseInt(checkbox.getAttribute('data-id'));
             const index = parseInt(checkbox.getAttribute('data-index'));
@@ -3624,8 +4132,7 @@
                 }
             }
         }
-
-        // 加载学习计划
+        
         function loadStudyPlans() {
             const saved = localStorage.getItem('sentenceStudyPlans');
             if (saved) {
@@ -3653,8 +4160,7 @@
                 }
             }
         }
-
-        // 保存学习计划
+        
         function saveStudyPlans() {
             const serializable = {};
             Object.keys(studyPlans).forEach(key => {
@@ -3673,29 +4179,25 @@
             });
             localStorage.setItem('sentenceStudyPlans', JSON.stringify(serializable));
         }
-
-        // 辅助函数：添加天数
+        
         function addDays(date, days) {
             const result = new Date(date);
             result.setDate(result.getDate() + days);
             return result;
         }
-
-        // 辅助函数：格式化日期
+        
         function formatDate(date) {
             const year = date.getFullYear();
             const month = String(date.getMonth() + 1).padStart(2, '0');
             const day = String(date.getDate()).padStart(2, '0');
             return `${year}-${month}-${day}`;
         }
-
-        // 辅助函数：获取星期几
+        
         function getDayOfWeek(date) {
             const days = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
             return days[date.getDay()];
         }
-
-        // 渲染列表视图
+        
         function renderList() {
             listContainer.innerHTML = '';
             
@@ -3788,8 +4290,7 @@
                 listContainer.appendChild(item);
             });
         }
-
-        // 获取筛选后的句子
+        
         function getFilteredSentences() {
             let filtered = sentences;
             
@@ -3809,14 +4310,12 @@
             
             return filtered;
         }
-
-        // 处理搜索
+        
         function handleSearch() {
             searchTerm = searchInput.value.trim();
             filterSentences();
         }
-
-        // 筛选句子
+        
         function filterSentences() {
             if (currentView === 'cards') {
                 renderCards();
@@ -3825,8 +4324,7 @@
             }
             updateCounters();
         }
-
-        // 切换视图
+        
         function toggleView() {
             if (currentView === 'cards') {
                 cardsContainer.style.display = 'grid';
@@ -3839,8 +4337,7 @@
             }
             updateCounters();
         }
-
-        // 更新计数器
+        
         function updateCounters() {
             const filteredSentences = getFilteredSentences();
             cardCount.textContent = filteredSentences.length;
@@ -3867,8 +4364,7 @@
                 document.getElementById('theme-words').textContent = totalThemeWords;
             }
         }
-
-        // 文本转语音
+        
         function speakText(text) {
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
