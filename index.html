@@ -51,7 +51,7 @@
             font-weight: bold;
             margin-top: 10px;
             padding: 8px 15px;
-            background-color: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);;
+            background: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
             border-radius: 12px;
             display: inline-block;
             box-shadow: 0 3px 8px rgba(230, 57, 70, 0.2);
@@ -89,6 +89,172 @@
         .stat-label {
             font-size: 0.9rem;
             color: #555;
+        }
+        
+        /* 今日任务面板样式 */
+        .today-tasks-panel {
+            margin: 20px 0 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #e6f3ff 0%, #d4e6ff 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 2px solid #ffd700;
+            display: none;
+        }
+        
+        .today-tasks-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffd700;
+        }
+        
+        .today-tasks-title {
+            font-size: 1.3rem;
+            color: #2d6a4f;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .today-tasks-title i {
+            color: #ff6b6b;
+        }
+        
+        .today-tasks-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 1rem;
+            color: #555;
+        }
+        
+        .today-tasks-list {
+            margin-top: 15px;
+        }
+        
+        .today-task-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            border-left: 4px solid #52b788;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .today-task-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .task-sentence-info {
+            flex-grow: 1;
+        }
+        
+        .task-sentence-id {
+            display: inline-block;
+            background-color: #52b788;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+        
+        .task-sentence-en {
+            font-weight: 500;
+            color: #2d6a4f;
+            margin-bottom: 5px;
+        }
+        
+        .task-sentence-cn {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .task-theme {
+            background-color: rgba(47, 126, 155, 0.1);
+            color: #2f7e9b;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 15px;
+        }
+        
+        .task-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .task-status {
+            font-size: 0.85rem;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        
+        .task-status.pending {
+            background-color: #ffeaa7;
+            color: #7c3e1d;
+        }
+        
+        .task-status.completed {
+            background-color: #52b788;
+            color: white;
+        }
+        
+        .task-status.overdue {
+            background-color: #ff7675;
+            color: white;
+        }
+        
+        .task-action-btn {
+            background-color: #52b788;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .task-action-btn:hover {
+            background-color: #40916c;
+            transform: translateY(-2px);
+        }
+        
+        .task-action-btn.completed {
+            background-color: #74c69d;
+        }
+        
+        .today-tasks-empty {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+            font-size: 1rem;
+        }
+        
+        .today-tasks-empty i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #b7e4c7;
         }
         
         .controls {
@@ -221,6 +387,8 @@
         .list-container {
             display: none;
         }
+        
+        /* 其他样式保持不变... */
         
         .sentence-item {
             background-color: white;
@@ -765,6 +933,7 @@
         }
         
         .ladder-container {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -777,9 +946,10 @@
             align-items: flex-end;
             justify-content: space-between;
             width: 100%;
-            height: 130px;
+            height: 120px;
             position: relative;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 0;
         }
         
         .ladder-step {
@@ -797,7 +967,7 @@
             position: relative;
             overflow: hidden;
             text-align: center;
-            min-height: 20px;
+            min-height: 15px;
         }
         
         .ladder-step:before {
@@ -824,16 +994,16 @@
         }
         
         /* 不同阶梯高度 */
-        .ladder-step.step-1 { height: 25px; }
-        .ladder-step.step-2 { height: 35px; }
-        .ladder-step.step-3 { height: 45px; }
-        .ladder-step.step-4 { height: 55px; }
-        .ladder-step.step-5 { height: 65px; }
-        .ladder-step.step-6 { height: 75px; }
-        .ladder-step.step-7 { height: 85px; }
-        .ladder-step.step-8 { height: 95px; }
-        .ladder-step.step-9 { height: 105px; }
-        .ladder-step.step-10 { height: 120px; }
+        .ladder-step.step-1 { height: 15px; }
+        .ladder-step.step-2 { height: 25px; }
+        .ladder-step.step-3 { height: 35px; }
+        .ladder-step.step-4 { height: 45px; }
+        .ladder-step.step-5 { height: 55px; }
+        .ladder-step.step-6 { height: 65px; }
+        .ladder-step.step-7 { height: 75px; }
+        .ladder-step.step-8 { height: 85px; }
+        .ladder-step.step-9 { height: 95px; }
+        .ladder-step.step-10 { height: 110px; }
         
         /* 随机颜色类 */
         .color-1:before { background: linear-gradient(to top, #ff6b6b, #ff8e8e); }
@@ -852,19 +1022,48 @@
             font-weight: bold;
         }
         
-        .ladder-labels {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 5px;
+        /* 罗小黑登梯样式 - 在阶梯上 */
+        .lulu-character {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 55px;
+            transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 15;
+            pointer-events: none;
         }
         
-        .ladder-label {
-            font-size: 0.7rem;
-            color: #666;
-            width: 9%;
-            text-align: center;
-            font-weight: 500;
+        .lulu-character img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+            animation: lulu-bounce 2s infinite;
+            transform-origin: bottom center;
+        }
+        
+        @keyframes lulu-bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(1.05); }
+        }
+        
+        .lulu-character.climbing img {
+            animation: lulu-climb 0.5s infinite alternate;
+        }
+        
+        @keyframes lulu-climb {
+            0% { transform: translateY(0) rotate(0deg) scale(1); }
+            100% { transform: translateY(-5px) rotate(5deg) scale(1.05); }
+        }
+        
+        .lulu-character.celebrate img {
+            animation: lulu-celebrate 0.8s infinite alternate;
+        }
+        
+        @keyframes lulu-celebrate {
+            0% { transform: translateY(0) rotate(0deg) scale(1); }
+            100% { transform: translateY(-15px) rotate(10deg) scale(1.1); }
         }
         
         .ladder-message {
@@ -969,6 +1168,16 @@
             .ladder-step.step-8 { height: 95px; }
             .ladder-step.step-9 { height: 105px; }
             .ladder-step.step-10 { height: 115px; }
+            
+            .task-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .lulu-character {
+                width: 35px;
+                height: 50px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -1015,24 +1224,46 @@
                 font-size: 0.65rem;
             }
             
-            .ladder-step.step-1 { height: 20px; }
-            .ladder-step.step-2 { height: 30px; }
-            .ladder-step.step-3 { height: 40px; }
-            .ladder-step.step-4 { height: 50px; }
-            .ladder-step.step-5 { height: 60px; }
-            .ladder-step.step-6 { height: 70px; }
-            .ladder-step.step-7 { height: 80px; }
-            .ladder-step.step-8 { height: 90px; }
-            .ladder-step.step-9 { height: 100px; }
-            .ladder-step.step-10 { height: 110px; }
+            .ladder-step.step-1 { height: 12px; }
+            .ladder-step.step-2 { height: 22px; }
+            .ladder-step.step-3 { height: 32px; }
+            .ladder-step.step-4 { height: 42px; }
+            .ladder-step.step-5 { height: 52px; }
+            .ladder-step.step-6 { height: 62px; }
+            .ladder-step.step-7 { height: 72px; }
+            .ladder-step.step-8 { height: 82px; }
+            .ladder-step.step-9 { height: 92px; }
+            .ladder-step.step-10 { height: 102px; }
             
             .ladder-steps {
-                height: 110px;
+                height: 90px;
             }
             
             .achievement-text {
                 font-size: 1.1rem;
                 padding: 6px 12px;
+            }
+            
+            .today-task-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .task-actions {
+                flex-direction: row;
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+            
+            .today-tasks-stats {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .lulu-character {
+                width: 30px;
+                height: 45px;
             }
         }
         
@@ -1059,18 +1290,26 @@
                 width: 8.5%;
             }
             
-            .ladder-label {
-                width: 8.5%;
-                font-size: 0.6rem;
-            }
-            
             .ladder-steps {
-                height: 100px;
+                height: 80px;
             }
             
             .achievement-text {
                 font-size: 1rem;
                 padding: 5px 10px;
+            }
+            
+            .today-tasks-title {
+                font-size: 1.1rem;
+            }
+            
+            .task-sentence-en {
+                font-size: 0.95rem;
+            }
+            
+            .lulu-character {
+                width: 25px;
+                height: 40px;
             }
         }
     </style>
@@ -1109,6 +1348,24 @@
         </div>
     </div>
     
+    <!-- 今日任务面板 -->
+    <div class="today-tasks-panel" id="todayTasksPanel">
+        <div class="today-tasks-header">
+            <div class="today-tasks-title">
+                <i class="fas fa-tasks"></i> 今日学习任务
+                <span id="todayTasksCount" class="stat-value" style="font-size: 1.2rem; color: #ff6b6b;">0</span> 个
+            </div>
+            <div class="today-tasks-stats">
+                <span>已完成: <span id="todayCompletedCount" class="stat-value" style="font-size: 1rem; color: #52b788;">0</span></span>
+                <span>待完成: <span id="todayPendingCount" class="stat-value" style="font-size: 1rem; color: #ff9f1c;">0</span></span>
+                <span>已过期: <span id="todayOverdueCount" class="stat-value" style="font-size: 1rem; color: #ff6b6b;">0</span></span>
+            </div>
+        </div>
+        <div class="today-tasks-list" id="todayTasksList">
+            <!-- 动态生成今日任务列表 -->
+        </div>
+    </div>
+    
     <div class="controls">
         <div class="left-controls">
             <div class="search-box">
@@ -1139,7 +1396,7 @@
         </div>
         
         <div class="right-controls">
-            <div class="view-toggle">
+             <div class="view-toggle">
                 <button class="view-btn active" data-view="cards">
                     <i class="fas fa-th-large"></i> 卡片
                 </button>
@@ -1167,7 +1424,7 @@
     </div>
 
     <script>
-        // 句子数据
+        // 句子数据（简化版本，包含前5个句子作为示例）
         const sentences = [
             {
                 id: 1,
@@ -1211,7 +1468,7 @@
                     {word: "food", phonetic: "[fuːd]", meaning: "食品；食物", phonics: "f-oo-d (f-oo-d)", breakdown: "f / oo / d"}
                 ]
             },
-{
+            {
                 id: 3,
                 theme: "健康",
                 en: "Which fruit do you like, apples or oranges?",
@@ -1228,12 +1485,7 @@
                     {word: "grape", phonetic: "[ɡreɪp]", meaning: "葡萄", phonics: "gr-a-pe (gr-ei-p)", breakdown: "gr / ape"},
                     {word: "peach", phonetic: "[piːtʃ]", meaning: "桃", phonics: "p-ea-ch (p-ee-ch)", breakdown: "p / each"},
                     {word: "mango", phonetic: "[ˈmæŋɡəʊ]", meaning: "芒果", phonics: "ma-ng-o (m-æ-ŋ-g-əʊ)", breakdown: "man / go"},
-                    {word: "lemon", phonetic: "[ˈlemən]", meaning: "柠檬", phonics: "le-mo-n (l-e-m-ə-n)", breakdown: "le / mon"},
-                    {word: "cherry", phonetic: "[ˈtʃeri]", meaning: "樱桃", phonics: "che-rry (tʃ-e-r-y)", breakdown: "cher / ry"},
-                    {word: "watermelon", phonetic: "[ˈwɔːtəmelən]", meaning: "西瓜", phonics: "wa-ter-me-lo-n (w-ɔː-t-ə-m-e-l-ə-n)", breakdown: "water / melon"},
-                    {word: "strawberry", phonetic: "[ˈstrɔːbəri]", meaning: "草莓", phonics: "stra-w-be-rry (str-ɔː-w-b-ə-r-y)", breakdown: "straw / berry"},
-                    {word: "banana", phonetic: "[bəˈnɑːnə]", meaning: "香蕉", phonics: "ba-na-na (b-ə-n-ɑː-n-ə)", breakdown: "ba / na / na"},
-                    {word: "fresh", phonetic: "[freʃ]", meaning: "新鲜的", phonics: "fr-e-sh (fr-e-ʃ)", breakdown: "fr / esh"}
+                    {word: "lemon", phonetic: "[ˈlemən]", meaning: "柠檬", phonics: "le-mo-n (l-e-m-ə-n)", breakdown: "le / mon"}
                 ]
             },
             {
@@ -1256,11 +1508,7 @@
                     {word: "restaurant", phonetic: "[ˈrestrɒnt]", meaning: "饭店，餐馆", phonics: "re-stau-ra-nt (r-e-st-ɔː-r-ə-nt)", breakdown: "rest / au / rant"},
                     {word: "waiter", phonetic: "[ˈweɪtə(r)]", meaning: "服务员", phonics: "wai-ter (w-ei-t-ə-r)", breakdown: "wait / er"},
                     {word: "menu", phonetic: "[ˈmenjuː]", meaning: "菜单", phonics: "me-nu (m-e-n-juː)", breakdown: "me / nu"},
-                    {word: "sound", phonetic: "[saʊnd]", meaning: "听起来；发出声音", phonics: "s-ou-nd (s-aʊ-nd)", breakdown: "s / ound"},
-                    {word: "smell", phonetic: "[smel]", meaning: "有（或发出）...气味；闻起来", phonics: "sm-e-ll (sm-e-ll)", breakdown: "sm / ell"},
-                    {word: "look", phonetic: "[lʊk]", meaning: "看；瞧；看上去；寻找", phonics: "l-oo-k (l-ʊ-k)", breakdown: "l / ook"},
-                    {word: "feel", phonetic: "[fiːl]", meaning: "感觉；使人觉得；摸上去...", phonics: "f-ee-l (f-ee-l)", breakdown: "f / eel"},
-                    {word: "touch", phonetic: "[tʌtʃ]", meaning: "触摸；接触", phonics: "t-ou-ch (t-ʌ-tʃ)", breakdown: "t / ouch"}
+                    {word: "sound", phonetic: "[saʊnd]", meaning: "听起来；发出声音", phonics: "s-ou-nd (s-aʊ-nd)", breakdown: "s / ound"}
                 ]
             },
             {
@@ -3426,7 +3674,7 @@
             }
 
         ];
-
+       
 
         // DOM元素引用
         const cardsContainer = document.getElementById('cardsContainer');
@@ -3439,6 +3687,13 @@
         const totalCheckedWordsElement = document.getElementById('totalCheckedWords');
         const achievementText = document.getElementById('achievementText');
         const checkedWordsStat = document.getElementById('checked-words');
+        const todayTasksPanel = document.getElementById('todayTasksPanel');
+        const todayTasksList = document.getElementById('todayTasksList');
+        const todayTasksCount = document.getElementById('todayTasksCount');
+        const todayCompletedCount = document.getElementById('todayCompletedCount');
+        const todayPendingCount = document.getElementById('todayPendingCount');
+        const todayOverdueCount = document.getElementById('todayOverdueCount');
+        const refreshTodayTasksBtn = document.getElementById('refreshTodayTasksBtn');
 
         // 当前状态
         let currentTheme = 'all';
@@ -3450,6 +3705,307 @@
         
         // 单词高亮状态存储
         let wordHighlights = {};
+
+        // 初始化
+        function init() {
+            // 从本地存储加载学习计划
+            loadStudyPlans();
+            // 从本地存储加载单词高亮状态
+            loadWordHighlights();
+            
+            renderCards();
+            renderList();
+            updateCounters();
+            updateThemeCount();
+            
+            // 初始化总勾选单词数显示
+            updateTotalCheckedWords();
+            
+            // 更新今日任务
+            updateTodayTasks();
+            
+            // 设置事件监听器
+            searchInput.addEventListener('input', handleSearch);
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    currentTheme = button.getAttribute('data-theme');
+                    filterSentences();
+                });
+            });
+            
+            viewButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    viewButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    currentView = button.getAttribute('data-view');
+                    toggleView();
+                });
+            });
+            
+            // 设置学习计划复选框事件委托
+            document.addEventListener('change', function(e) {
+                if (e.target && e.target.classList && e.target.classList.contains('study-plan-checkbox')) {
+                    handleCheckboxChange(e.target);
+                    // 更新今日任务
+                    updateTodayTasks();
+                }
+                // 处理单词勾选框点击
+                if (e.target && e.target.classList && e.target.classList.contains('word-checkbox')) {
+                    handleWordCheckboxChange(e.target);
+                }
+            });
+            
+            // 处理单词点击高亮（简化版本）
+            document.addEventListener('click', function(e) {
+                // 点击单词文本
+                if (e.target && e.target.classList && e.target.classList.contains('word')) {
+                    const wordItem = e.target.closest('.word-item, .word-item-list');
+                    if (wordItem) {
+                        const checkbox = wordItem.querySelector('.word-checkbox');
+                        if (checkbox) {
+                            checkbox.checked = !checkbox.checked;
+                            handleWordCheckboxChange(checkbox);
+                        }
+                    }
+                }
+                
+                // 点击单词内容的任何部分
+                if (e.target && e.target.closest('.word-content')) {
+                    const wordItem = e.target.closest('.word-item, .word-item-list');
+                    if (wordItem && !e.target.classList.contains('word-checkbox')) {
+                        const checkbox = wordItem.querySelector('.word-checkbox');
+                        if (checkbox) {
+                            checkbox.checked = !checkbox.checked;
+                            handleWordCheckboxChange(checkbox);
+                        }
+                    }
+                }
+                
+                // 点击今日任务按钮
+                if (e.target && e.target.classList && e.target.classList.contains('task-action-btn')) {
+                    handleTaskActionClick(e.target);
+                }
+            });
+            
+                 }
+
+        // 更新今日任务
+        function updateTodayTasks() {
+            const today = new Date();
+            const todayStr = formatDate(today);
+            
+            // 收集今日任务
+            const todayTasks = [];
+            let completedCount = 0;
+            let pendingCount = 0;
+            let overdueCount = 0;
+            
+            // 遍历所有句子
+            Object.keys(studyPlans).forEach(sentenceId => {
+                const plan = studyPlans[sentenceId];
+                const sentence = sentences.find(s => s.id == sentenceId);
+                
+                if (!sentence || !plan) return;
+                
+                // 检查是否有今天的学习任务
+                plan.dates.forEach((dateObj, index) => {
+                    const taskDateStr = formatDate(dateObj.date);
+                    
+                    // 如果是今天的任务或已过期的任务
+                    if (taskDateStr <= todayStr) {
+                        const isToday = taskDateStr === todayStr;
+                        const isPast = dateObj.date < today && !isToday;
+                        const isCompleted = plan.completed[index];
+                        
+                        // 如果是今天或过去的未完成任务
+                        if (!isCompleted) {
+                            todayTasks.push({
+                                sentenceId: sentenceId,
+                                sentence: sentence,
+                                dateIndex: index,
+                                dateObj: dateObj,
+                                isToday: isToday,
+                                isPast: isPast,
+                                isCompleted: false
+                            });
+                            
+                            if (isPast) {
+                                overdueCount++;
+                            } else if (isToday) {
+                                pendingCount++;
+                            }
+                        } else if (isToday) {
+                            // 今天已完成的任务
+                            completedCount++;
+                        }
+                    }
+                });
+            });
+            
+            // 按日期排序：今天优先，然后按日期排序
+            todayTasks.sort((a, b) => {
+                // 今天优先
+                if (a.isToday && !b.isToday) return -1;
+                if (!a.isToday && b.isToday) return 1;
+                
+                // 然后按日期排序
+                return a.dateObj.date - b.dateObj.date;
+            });
+            
+            // 更新任务计数
+            const totalTodayTasks = todayTasks.length + completedCount;
+            todayTasksCount.textContent = totalTodayTasks;
+            todayCompletedCount.textContent = completedCount;
+            todayPendingCount.textContent = pendingCount;
+            todayOverdueCount.textContent = overdueCount;
+            
+            // 生成任务列表HTML
+            let tasksHTML = '';
+            
+            if (todayTasks.length === 0 && completedCount === 0) {
+                // 没有今日任务
+                tasksHTML = `
+                    <div class="today-tasks-empty">
+                        <i class="fas fa-calendar-check"></i>
+                        <p>今天没有学习任务，休息一下或者添加新的学习计划吧！</p>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #999;">
+                            点击卡片上的"开始学习"按钮创建学习计划
+                        </p>
+                    </div>
+                `;
+                todayTasksPanel.style.display = 'none';
+            } else {
+                // 显示今日任务列表
+                todayTasksPanel.style.display = 'block';
+                
+                // 生成已完成任务部分（如果有）
+                if (completedCount > 0) {
+                    tasksHTML += `
+                        <div style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px dashed #ddd;">
+                            <h4 style="color: #52b788; margin-bottom: 10px;">
+                                <i class="fas fa-check-circle"></i> 今日已完成 (${completedCount})
+                            </h4>
+                            <p style="color: #666; font-size: 0.9rem; text-align: center;">
+                                <i class="fas fa-trophy"></i> 今天已经完成了${completedCount}个学习任务，真棒！
+                            </p>
+                        </div>
+                    `;
+                }
+                
+                // 生成待完成任务部分
+                todayTasks.forEach(task => {
+                    const statusClass = task.isPast ? 'overdue' : 'pending';
+                    const statusText = task.isPast ? '已过期' : '待学习';
+                    const buttonText = task.isPast ? '标记完成' : '标记完成';
+                    
+                    tasksHTML += `
+                        <div class="today-task-item">
+                            <div class="task-sentence-info">
+                                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                    <span class="task-sentence-id">${task.sentence.id}</span>
+                                    <span class="task-theme">${task.sentence.theme}</span>
+                                    <span class="task-status ${statusClass}">${statusText} - ${task.dateObj.formatted} ${task.dateObj.dayOfWeek}</span>
+                                </div>
+                                <div class="task-sentence-en">${task.sentence.en}</div>
+                                <div class="task-sentence-cn">${task.sentence.cn}</div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="task-action-btn" data-id="${task.sentenceId}" data-index="${task.dateIndex}">
+                                    <i class="fas fa-check"></i> ${buttonText}
+                                </button>
+                                <button class="task-action-btn completed" onclick="location.href='#card-${task.sentenceId}'">
+                                    <i class="fas fa-book-open"></i> 去学习
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            todayTasksList.innerHTML = tasksHTML;
+        }
+        
+        // 处理今日任务按钮点击
+        function handleTaskActionClick(button) {
+            const sentenceId = button.getAttribute('data-id');
+            const dateIndex = parseInt(button.getAttribute('data-index'));
+            
+            if (sentenceId && dateIndex >= 0) {
+                // 标记任务为完成
+                if (studyPlans[sentenceId]) {
+                    studyPlans[sentenceId].completed[dateIndex] = true;
+                    saveStudyPlans();
+                    
+                    // 更新卡片中的计划
+                    updateStudyPlanUI(parseInt(sentenceId));
+                    
+                    // 更新今日任务
+                    updateTodayTasks();
+                    
+                    // 显示成功提示
+                    showNotification('任务完成！继续加油！', 'success');
+                }
+            }
+        }
+        
+        // 显示通知
+        function showNotification(message, type) {
+            // 创建通知元素
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                background-color: ${type === 'success' ? '#52b788' : '#ff7675'};
+                color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 1000;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // 3秒后移除通知
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+            
+            // 添加动画关键帧
+            if (!document.querySelector('#notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
 
         // 计算已勾选单词总数
         function calculateTotalCheckedWords() {
@@ -3519,7 +4075,18 @@
             return colorClasses[Math.floor(Math.random() * colorClasses.length)];
         }
         
-        // 新增函数：创建单词阶梯（水平方向）
+        // 新增函数：获取罗小黑图片
+        function getLuluImage(checkedCount, totalWords) {
+            // 这里替换为您的罗小黑图片URL
+            const imageUrl = "1.png"; // 请替换为实际图片URL
+            
+            return `
+                <img src="${imageUrl}" alt="罗小黑" 
+                     style="width:100%;height:100%;object-fit:contain;">
+            `;
+        }
+        
+        // 新增函数：创建单词阶梯（带罗小黑）
         function createWordLadder(sentenceId, coreWordsCount, themeWordsCount) {
             // 计算总单词数
             const totalWords = coreWordsCount + themeWordsCount;
@@ -3559,21 +4126,30 @@
             // 计算点亮多少级阶梯
             const activeSteps = Math.ceil((checkedCount / totalWords) * ladderSteps);
             
+            // 计算罗小黑的位置（在阶梯上）
+            const luluPosition = activeSteps > 0 ? ((activeSteps - 1) / ladderSteps) * 100 : 0;
+            
             // 生成阶梯HTML
             let ladderHTML = `
                 <div class="word-ladder">
                     <div class="ladder-title">
-                        <span><i class="fas fa-mountain"></i> 单词登山阶梯</span>
+                        <span><i class="fas fa-mountain"></i> 罗小黑登山梯</span>
                         <span class="ladder-progress">${checkedCount}/${totalWords} (${progressPercentage.toFixed(0)}%)</span>
                     </div>
                     <div class="ladder-container">
                         <div class="ladder-steps">
+                            <!-- 添加罗小黑角色在阶梯上 -->
+                            <div class="lulu-character ${checkedCount === totalWords ? 'celebrate' : (checkedCount > 0 ? 'climbing' : '')}" 
+                                 id="lulu-${sentenceId}"
+                                 style="left: calc(${luluPosition}% - 20px); bottom: ${activeSteps > 0 ? getStepTopPosition(activeSteps, ladderSteps) : '0px'};">
+                                ${getLuluImage(checkedCount, totalWords)}
+                            </div>
             `;
             
             // 从左向右生成阶梯
             for (let i = 1; i <= ladderSteps; i++) {
                 const stepClass = `ladder-step step-${i} ${colorClass} ${i <= activeSteps ? 'active' : ''}`;
-                const stepText = i === ladderSteps ? "山顶" : `第${i}级`;
+                const stepText = i === ladderSteps ? "🏔️" : `${i}`;
                 
                 ladderHTML += `
                     <div class="${stepClass}">
@@ -3582,36 +4158,24 @@
                 `;
             }
             
-            ladderHTML += `
-                        </div>
-                        <div class="ladder-labels">
-            `;
-            
-            // 添加底部标签
-            for (let i = 1; i <= ladderSteps; i++) {
-                const labelText = i === ladderSteps ? "山顶" : `L${i}`;
-                ladderHTML += `<div class="ladder-label">${labelText}</div>`;
+            // 根据完成状态添加不同的鼓励消息
+            let encouragementMessage = '';
+            if (checkedCount === 0) {
+                encouragementMessage = '罗小黑在起点等着你，开始攀登吧！';
+            } else if (checkedCount === totalWords) {
+                encouragementMessage = '<span class="ladder-achievement">🎉 罗小黑登顶成功！</span> 小宝贝太棒了！';
+            } else if (progressPercentage >= 70) {
+                encouragementMessage = `<span class="ladder-achievement">🏔️ 罗小黑快到山顶了！</span> 还差${totalWords - checkedCount}个单词加油！`;
+            } else if (progressPercentage >= 40) {
+                encouragementMessage = `<span class="ladder-achievement">✨ 罗小黑稳步前进！</span> 已经掌握${checkedCount}个单词啦！`;
+            } else {
+                encouragementMessage = `<span class="ladder-achievement">🐾 罗小黑正在努力攀登！</span> 已经记住${checkedCount}个单词了！`;
             }
             
             ladderHTML += `
                         </div>
                         <div class="ladder-message">
-            `;
-            
-            // 根据完成情况添加鼓励消息
-            if (checkedCount === 0) {
-                ladderHTML += `开始攀登吧！每记住一个单词，就点亮一级阶梯。`;
-            } else if (checkedCount === totalWords) {
-                ladderHTML += `<span class="ladder-achievement">恭喜登顶！</span> 你已掌握本卡片所有单词！`;
-            } else if (progressPercentage >= 70) {
-                ladderHTML += `<span class="ladder-achievement">快要到山顶了！</span> 还差${totalWords - checkedCount}个单词就全部掌握了！`;
-            } else if (progressPercentage >= 40) {
-                ladderHTML += `<span class="ladder-achievement">继续加油！</span> 你已经掌握了大部分单词，坚持就是胜利！`;
-            } else {
-                ladderHTML += `<span class="ladder-achievement">稳步前进！</span> 你已经记住了${checkedCount}个单词，继续加油！`;
-            }
-            
-            ladderHTML += `
+                            ${encouragementMessage}
                         </div>
                     </div>
                 </div>
@@ -3619,115 +4183,18 @@
             
             return ladderHTML;
         }
-
-        // 初始化
-        function init() {
-            // 从本地存储加载学习计划
-            loadStudyPlans();
-            // 从本地存储加载单词高亮状态
-            loadWordHighlights();
-            
-            renderCards();
-            renderList();
-            updateCounters();
-            updateThemeCount();
-            
-            // 初始化总勾选单词数显示
-            updateTotalCheckedWords();
-            
-            // 设置事件监听器
-            searchInput.addEventListener('input', handleSearch);
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    currentTheme = button.getAttribute('data-theme');
-                    filterSentences();
-                });
-            });
-            
-            viewButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    viewButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    currentView = button.getAttribute('data-view');
-                    toggleView();
-                });
-            });
-            
-            // 设置学习计划复选框事件委托
-            document.addEventListener('change', function(e) {
-                if (e.target && e.target.classList && e.target.classList.contains('study-plan-checkbox')) {
-                    handleCheckboxChange(e.target);
-                }
-                // 处理单词勾选框点击
-                if (e.target && e.target.classList && e.target.classList.contains('word-checkbox')) {
-                    handleWordCheckboxChange(e.target);
-                }
-            });
-            
-            // 处理单词点击高亮（简化版本）
-            document.addEventListener('click', function(e) {
-                // 点击单词文本
-                if (e.target && e.target.classList && e.target.classList.contains('word')) {
-                    const wordItem = e.target.closest('.word-item, .word-item-list');
-                    if (wordItem) {
-                        const checkbox = wordItem.querySelector('.word-checkbox');
-                        if (checkbox) {
-                            checkbox.checked = !checkbox.checked;
-                            handleWordCheckboxChange(checkbox);
-                        }
-                    }
-                }
-                
-                // 点击单词内容的任何部分
-                if (e.target && e.target.closest('.word-content')) {
-                    const wordItem = e.target.closest('.word-item, .word-item-list');
-                    if (wordItem && !e.target.classList.contains('word-checkbox')) {
-                        const checkbox = wordItem.querySelector('.word-checkbox');
-                        if (checkbox) {
-                            checkbox.checked = !checkbox.checked;
-                            handleWordCheckboxChange(checkbox);
-                        }
-                    }
-                }
-            });
-        }
-
-        // 处理单词勾选框变化
-        function handleWordCheckboxChange(checkbox) {
-            const wordKey = checkbox.getAttribute('data-key');
-            const isChecked = checkbox.checked;
-            
-            // 更新存储状态
-            wordHighlights[wordKey] = isChecked;
-            
-            // 保存到本地存储
-            saveWordHighlights();
-            
-            // 更新UI - 添加或移除高亮类
-            const wordItem = checkbox.closest('.word-item, .word-item-list');
-            if (wordItem) {
-                if (isChecked) {
-                    wordItem.classList.add('word-highlighted');
-                } else {
-                    wordItem.classList.remove('word-highlighted');
-                }
-            }
-            
-            // 获取句子ID并更新阶梯
-            const keyParts = wordKey.split('_');
-            if (keyParts.length >= 2) {
-                const sentenceId = parseInt(keyParts[0].substring(1));
-                updateWordLadder(sentenceId);
-            }
-            
-            // 更新总勾选单词数显示
-            updateTotalCheckedWords();
-        }
         
-        // 新增函数：更新单词阶梯
+        // 辅助函数：根据阶梯编号获取高度
+        function getStepTopPosition(step, totalSteps) {
+            const stepHeights = {
+                1: 15, 2: 25, 3: 35, 4: 45, 5: 55,
+                6: 65, 7: 75, 8: 85, 9: 95, 10: 110
+            };
+            const height = stepHeights[step] || 0;
+            return `${height}px`;
+        }
+
+        // 修改updateWordLadder函数，更新罗小黑位置
         function updateWordLadder(sentenceId) {
             // 找到对应的句子
             const sentence = sentences.find(s => s.id === sentenceId);
@@ -3764,6 +4231,9 @@
             // 计算点亮多少级阶梯
             const activeSteps = Math.ceil((checkedCount / totalWords) * ladderSteps);
             
+            // 计算罗小黑的新位置（在阶梯上）
+            const luluPosition = activeSteps > 0 ? ((activeSteps - 1) / ladderSteps) * 100 : 0;
+            
             // 获取卡片背面的阶梯容器
             const ladderContainer = document.querySelector(`[data-id="${sentenceId}"] .word-ladder`);
             if (ladderContainer) {
@@ -3783,21 +4253,49 @@
                     }
                 });
                 
+                // 更新罗小黑位置和状态
+                const luluElement = document.getElementById(`lulu-${sentenceId}`);
+                if (luluElement) {
+                    // 更新位置 - 在阶梯上
+                    luluElement.style.left = `calc(${luluPosition}% - 20px)`;
+                    luluElement.style.bottom = activeSteps > 0 ? getStepTopPosition(activeSteps, ladderSteps) : '-5px';
+                    
+                    // 更新动画类
+                    luluElement.className = 'lulu-character';
+                    if (checkedCount === totalWords) {
+                        luluElement.classList.add('celebrate');
+                    } else if (checkedCount > 0) {
+                        luluElement.classList.add('climbing');
+                    }
+                    
+                    // 更新图片
+                    luluElement.innerHTML = getLuluImage(checkedCount, totalWords);
+                    
+                    // 如果正在攀登，添加攀登动画效果
+                    if (checkedCount > 0 && checkedCount < totalWords) {
+                        // 暂时添加一个跳跃动画
+                        luluElement.style.animation = 'none';
+                        setTimeout(() => {
+                            luluElement.style.animation = '';
+                        }, 10);
+                    }
+                }
+                
                 // 更新鼓励消息
                 const messageElement = ladderContainer.querySelector('.ladder-message');
                 if (messageElement) {
                     let message = '';
                     
                     if (checkedCount === 0) {
-                        message = `开始攀登吧！每记住一个单词，就点亮一级阶梯。`;
+                        message = '罗小黑在起点等着你，开始攀登吧！';
                     } else if (checkedCount === totalWords) {
-                        message = `<span class="ladder-achievement">恭喜登顶！</span> 你已掌握本卡片所有单词！`;
+                        message = '<span class="ladder-achievement">🎉 罗小黑登顶成功！</span> 小宝贝太棒了！';
                     } else if (progressPercentage >= 70) {
-                        message = `<span class="ladder-achievement">快要到山顶了！</span> 还差${totalWords - checkedCount}个单词就全部掌握了！`;
+                        message = `<span class="ladder-achievement">🏔️ 罗小黑快到山顶了！</span> 还差${totalWords - checkedCount}个单词加油！`;
                     } else if (progressPercentage >= 40) {
-                        message = `<span class="ladder-achievement">继续加油！</span> 你已经掌握了大部分单词，坚持就是胜利！`;
+                        message = `<span class="ladder-achievement">✨ 罗小黑稳步前进！</span> 已经掌握${checkedCount}个单词啦！`;
                     } else {
-                        message = `<span class="ladder-achievement">稳步前进！</span> 你已经记住了${checkedCount}个单词，继续加油！`;
+                        message = `<span class="ladder-achievement">🐾 罗小黑正在努力攀登！</span> 已经记住${checkedCount}个单词了！`;
                     }
                     
                     messageElement.innerHTML = message;
@@ -3805,185 +4303,49 @@
             }
         }
 
-        // 加载单词高亮状态
-        function loadWordHighlights() {
-            const saved = localStorage.getItem('wordHighlights');
-            if (saved) {
-                try {
-                    wordHighlights = JSON.parse(saved);
-                } catch (e) {
-                    console.error('加载单词高亮状态失败:', e);
-                    wordHighlights = {};
+        // 修改handleWordCheckboxChange函数，添加罗小黑爬梯动画
+        function handleWordCheckboxChange(checkbox) {
+            const wordKey = checkbox.getAttribute('data-key');
+            const isChecked = checkbox.checked;
+            
+            // 更新存储状态
+            wordHighlights[wordKey] = isChecked;
+            
+            // 保存到本地存储
+            saveWordHighlights();
+            
+            // 更新UI - 添加或移除高亮类
+            const wordItem = checkbox.closest('.word-item, .word-item-list');
+            if (wordItem) {
+                if (isChecked) {
+                    wordItem.classList.add('word-highlighted');
+                    
+                    // 添加一个简单的庆祝效果
+                    wordItem.style.transform = 'scale(1.05)';
+                    wordItem.style.backgroundColor = 'rgba(82, 183, 136, 0.4)';
+                    setTimeout(() => {
+                        wordItem.style.transform = '';
+                        wordItem.style.backgroundColor = '';
+                    }, 300);
+                } else {
+                    wordItem.classList.remove('word-highlighted');
                 }
-            } else {
-                wordHighlights = {};
             }
-        }
-
-        // 保存单词高亮状态
-        function saveWordHighlights() {
-            localStorage.setItem('wordHighlights', JSON.stringify(wordHighlights));
-        }
-
-        // 渲染卡片视图
-        function renderCards() {
-            cardsContainer.innerHTML = '';
             
-            const filteredSentences = getFilteredSentences();
+            // 获取句子ID并更新阶梯
+            const keyParts = wordKey.split('_');
+            if (keyParts.length >= 2) {
+                const sentenceId = parseInt(keyParts[0].substring(1));
+                updateWordLadder(sentenceId);
+            }
             
-            filteredSentences.forEach(sentence => {
-                const hasPlan = studyPlans[sentence.id];
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.setAttribute('data-id', sentence.id);
-                
-                // 创建单词阶梯
-                const wordLadderHTML = createWordLadder(sentence.id, sentence.coreWords.length, sentence.themeWords.length);
-                
-                card.innerHTML = `
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="sentence-num">${sentence.id}</div>
-                            <div class="theme-tag">${sentence.theme}</div>
-                            <div class="sentence-en">${sentence.en}<button class="audio-btn"><i class="fas fa-volume-up"></i></button></div>
-                            <div class="sentence-cn">${sentence.cn}</div>
-                            
-                            <div class="study-plan">
-                                <div class="study-plan-header">
-                                    <div class="study-plan-title">
-                                        <i class="fas fa-calendar-alt"></i> 学习计划
-                                    </div>
-                                    <button class="${hasPlan ? 'reset-study-btn' : 'start-study-btn'}" data-id="${sentence.id}" id="study-btn-${sentence.id}">
-                                        <i class="${hasPlan ? 'fas fa-redo' : 'fas fa-play-circle'}"></i> ${hasPlan ? '重新设置' : '开始学习'}
-                                    </button>
-                                </div>
-                                <div class="study-plan-content" id="study-plan-${sentence.id}">
-                                    ${hasPlan ? generateStudyPlanHTML(sentence.id) : '<p style="text-align: center; color: #888; padding: 20px;">点击"开始学习"按钮创建复习计划</p>'}
-                                </div>
-                            </div>
-                            
-                            <div class="flip-icon"><i class="fas fa-sync-alt"></i> 翻转</div>
-                        </div>
-                        <div class="card-back">
-                            <h3>单词学习卡 #${sentence.id} <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button></h3>
-                            
-                            <!-- 添加单词阶梯 - 放在顶部 -->
-                            ${wordLadderHTML}
-                            
-                            <div class="word-section-title">核心词汇 (${sentence.coreWords.length}个)</div>
-                            <ul class="word-list">
-                                ${sentence.coreWords.map((word, index) => {
-                                    const wordKey = `s${sentence.id}_core_${index}`;
-                                    const isHighlighted = wordHighlights[wordKey] || false;
-                                    return `
-                                        <li class="word-item ${isHighlighted ? 'word-highlighted' : ''}">
-                                            <input type="checkbox" class="word-checkbox" data-key="${wordKey}" ${isHighlighted ? 'checked' : ''}>
-                                            <div class="word-content">
-                                                <div class="word-row">
-                                                    <span class="word">${word.word}</span>
-                                                    <span class="phonetic">${word.phonetic}</span>
-                                                    <span class="phonics">${word.phonics}</span>
-                                                </div>
-                                                <div class="word-breakdown">${word.breakdown}</div>
-                                                <div class="meaning">${word.meaning}</div>
-                                            </div>
-                                            <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button>
-                                        </li>
-                                    `;
-                                }).join('')}
-                            </ul>
-                            
-                            <div class="word-section-title">主题归纳词汇 (${sentence.themeWords.length}个)</div>
-                            <ul class="word-list">
-                                ${sentence.themeWords.map((word, index) => {
-                                    const wordKey = `s${sentence.id}_theme_${index}`;
-                                    const isHighlighted = wordHighlights[wordKey] || false;
-                                    return `
-                                        <li class="word-item ${isHighlighted ? 'word-highlighted' : ''}">
-                                            <input type="checkbox" class="word-checkbox" data-key="${wordKey}" ${isHighlighted ? 'checked' : ''}>
-                                            <div class="word-content">
-                                                <div class="word-row">
-                                                    <span class="word">${word.word}</span>
-                                                    <span class="phonetic">${word.phonetic}</span>
-                                                    <span class="phonics">${word.phonics}</span>
-                                                </div>
-                                                <div class="word-breakdown">${word.breakdown}</div>
-                                                <div class="meaning">${word.meaning}</div>
-                                            </div>
-                                            <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button>
-                                        </li>
-                                    `;
-                                }).join('')}
-                            </ul>
-                            <div class="flip-icon"><i class="fas fa-sync-alt"></i> 返回</div>
-                        </div>
-                    </div>
-                `;
-                
-                // 添加点击翻转事件
-                card.addEventListener('click', function(e) {
-                    if (!e.target.classList.contains('audio-btn') && 
-                        !e.target.closest('.audio-btn') &&
-                        !e.target.classList.contains('start-study-btn') &&
-                        !e.target.closest('.start-study-btn') &&
-                        !e.target.classList.contains('reset-study-btn') &&
-                        !e.target.closest('.reset-study-btn') &&
-                        !e.target.classList.contains('study-plan-checkbox') &&
-                        !e.target.classList.contains('word-checkbox') &&
-                        !e.target.classList.contains('word') &&
-                        !e.target.closest('.word-content')) {
-                        this.classList.toggle('flipped');
-                    }
-                });
-                
-                // 添加发音事件
-                card.querySelectorAll('.audio-btn').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const sentenceText = this.closest('.card-front') 
-                            ? sentence.en 
-                            : this.closest('.word-item') 
-                                ? this.closest('.word-item').querySelector('.word').textContent 
-                                : sentence.en;
-                        speakText(sentenceText);
-                        
-                        this.classList.add('playing');
-                        setTimeout(() => {
-                            this.classList.remove('playing');
-                        }, 1000);
-                    });
-                });
-                
-                // 添加开始学习/重新设置按钮事件
-                const studyBtn = card.querySelector(`#study-btn-${sentence.id}`);
-                if (studyBtn) {
-                    studyBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const sentenceId = parseInt(this.getAttribute('data-id'));
-                        
-                        if (this.classList.contains('start-study-btn')) {
-                            createStudyPlan(sentenceId);
-                            updateStudyPlanUI(sentenceId);
-                            this.innerHTML = '<i class="fas fa-redo"></i> 重新设置';
-                            this.classList.remove('start-study-btn');
-                            this.classList.add('reset-study-btn');
-                        } else if (this.classList.contains('reset-study-btn')) {
-                            if (confirm('确定要重置学习计划吗？这将清除所有学习记录并重新开始。')) {
-                                resetStudyPlan(sentenceId);
-                                const planContent = document.getElementById(`study-plan-${sentenceId}`);
-                                if (planContent) {
-                                    planContent.innerHTML = '<p style="text-align: center; color: #888; padding: 20px;">点击"开始学习"按钮创建复习计划</p>';
-                                }
-                                this.innerHTML = '<i class="fas fa-play-circle"></i> 开始学习';
-                                this.classList.remove('reset-study-btn');
-                                this.classList.add('start-study-btn');
-                            }
-                        }
-                    });
-                }
-                
-                cardsContainer.appendChild(card);
-            });
+            // 更新总勾选单词数显示
+            updateTotalCheckedWords();
+            
+            // 显示一个可爱的提示
+            if (isChecked) {
+                showNotification('太棒了！罗小黑又爬高了一点！', 'success');
+            }
         }
 
         // 以下是原有函数的实现，保持不变
@@ -4084,11 +4446,13 @@
             };
             
             saveStudyPlans();
+            updateTodayTasks();
         }
         
         function resetStudyPlan(sentenceId) {
             delete studyPlans[sentenceId];
             saveStudyPlans();
+            updateTodayTasks();
         }
         
         function updateStudyPlanUI(sentenceId) {
@@ -4197,7 +4561,190 @@
             const days = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
             return days[date.getDay()];
         }
-        
+
+        // 渲染卡片视图
+        function renderCards() {
+            cardsContainer.innerHTML = '';
+            
+            const filteredSentences = getFilteredSentences();
+            
+            filteredSentences.forEach(sentence => {
+                const hasPlan = studyPlans[sentence.id];
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.setAttribute('data-id', sentence.id);
+                card.id = `card-${sentence.id}`;
+                
+                // 创建单词阶梯
+                const wordLadderHTML = createWordLadder(sentence.id, sentence.coreWords.length, sentence.themeWords.length);
+                
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="sentence-num">${sentence.id}</div>
+                            <div class="theme-tag">${sentence.theme}</div>
+                            <div class="sentence-en">${sentence.en}<button class="audio-btn"><i class="fas fa-volume-up"></i></button></div>
+                            <div class="sentence-cn">${sentence.cn}</div>
+                            
+                            <div class="study-plan">
+                                <div class="study-plan-header">
+                                    <div class="study-plan-title">
+                                        <i class="fas fa-calendar-alt"></i> 学习计划
+                                    </div>
+                                    <button class="${hasPlan ? 'reset-study-btn' : 'start-study-btn'}" data-id="${sentence.id}" id="study-btn-${sentence.id}">
+                                        <i class="${hasPlan ? 'fas fa-redo' : 'fas fa-play-circle'}"></i> ${hasPlan ? '重新设置' : '开始学习'}
+                                    </button>
+                                </div>
+                                <div class="study-plan-content" id="study-plan-${sentence.id}">
+                                    ${hasPlan ? generateStudyPlanHTML(sentence.id) : '<p style="text-align: center; color: #888; padding: 20px;">点击"开始学习"按钮创建复习计划</p>'}
+                                </div>
+                            </div>
+                            
+                            <div class="flip-icon"><i class="fas fa-sync-alt"></i> 翻转</div>
+                        </div>
+                        <div class="card-back">
+                            <h3>${sentence.id} <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button></h3>
+                            
+                            <!-- 添加单词阶梯 - 带罗小黑 -->
+                            ${wordLadderHTML}
+                            
+                            <div class="word-section-title">核心词汇 (${sentence.coreWords.length}个)</div>
+                            <ul class="word-list">
+                                ${sentence.coreWords.map((word, index) => {
+                                    const wordKey = `s${sentence.id}_core_${index}`;
+                                    const isHighlighted = wordHighlights[wordKey] || false;
+                                    return `
+                                        <li class="word-item ${isHighlighted ? 'word-highlighted' : ''}">
+                                            <input type="checkbox" class="word-checkbox" data-key="${wordKey}" ${isHighlighted ? 'checked' : ''}>
+                                            <div class="word-content">
+                                                <div class="word-row">
+                                                    <span class="word">${word.word}</span>
+                                                    <span class="phonetic">${word.phonetic}</span>
+                                                    <span class="phonics">${word.phonics}</span>
+                                                </div>
+                                                <div class="word-breakdown">${word.breakdown}</div>
+                                                <div class="meaning">${word.meaning}</div>
+                                            </div>
+                                            <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button>
+                                        </li>
+                                    `;
+                                }).join('')}
+                            </ul>
+                            
+                            <div class="word-section-title">主题归纳词汇 (${sentence.themeWords.length}个)</div>
+                            <ul class="word-list">
+                                ${sentence.themeWords.map((word, index) => {
+                                    const wordKey = `s${sentence.id}_theme_${index}`;
+                                    const isHighlighted = wordHighlights[wordKey] || false;
+                                    return `
+                                        <li class="word-item ${isHighlighted ? 'word-highlighted' : ''}">
+                                            <input type="checkbox" class="word-checkbox" data-key="${wordKey}" ${isHighlighted ? 'checked' : ''}>
+                                            <div class="word-content">
+                                                <div class="word-row">
+                                                    <span class="word">${word.word}</span>
+                                                    <span class="phonetic">${word.phonetic}</span>
+                                                    <span class="phonics">${word.phonics}</span>
+                                                </div>
+                                                <div class="word-breakdown">${word.breakdown}</div>
+                                                <div class="meaning">${word.meaning}</div>
+                                            </div>
+                                            <button class="audio-btn audio-btn-small"><i class="fas fa-volume-up"></i></button>
+                                        </li>
+                                    `;
+                                }).join('')}
+                            </ul>
+                            <div class="flip-icon"><i class="fas fa-sync-alt"></i> 返回</div>
+                        </div>
+                    </div>
+                `;
+                
+                // 添加点击翻转事件
+                card.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.closest('.audio-btn') &&
+                        !e.target.classList.contains('start-study-btn') &&
+                        !e.target.closest('.start-study-btn') &&
+                        !e.target.classList.contains('reset-study-btn') &&
+                        !e.target.closest('.reset-study-btn') &&
+                        !e.target.classList.contains('study-plan-checkbox') &&
+                        !e.target.classList.contains('word-checkbox') &&
+                        !e.target.classList.contains('word') &&
+                        !e.target.closest('.word-content')) {
+                        this.classList.toggle('flipped');
+                    }
+                });
+                
+                // 添加发音事件
+                card.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const sentenceText = this.closest('.card-front') 
+                            ? sentence.en 
+                            : this.closest('.word-item') 
+                                ? this.closest('.word-item').querySelector('.word').textContent 
+                                : sentence.en;
+                        speakText(sentenceText);
+                        
+                        this.classList.add('playing');
+                        setTimeout(() => {
+                            this.classList.remove('playing');
+                        }, 1000);
+                    });
+                });
+                
+                // 添加开始学习/重新设置按钮事件
+                const studyBtn = card.querySelector(`#study-btn-${sentence.id}`);
+                if (studyBtn) {
+                    studyBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const sentenceId = parseInt(this.getAttribute('data-id'));
+                        
+                        if (this.classList.contains('start-study-btn')) {
+                            createStudyPlan(sentenceId);
+                            updateStudyPlanUI(sentenceId);
+                            this.innerHTML = '<i class="fas fa-redo"></i> 重新设置';
+                            this.classList.remove('start-study-btn');
+                            this.classList.add('reset-study-btn');
+                            showNotification('学习计划已创建！记得按时完成任务哦~', 'success');
+                        } else if (this.classList.contains('reset-study-btn')) {
+                            if (confirm('确定要重置学习计划吗？这将清除所有学习记录并重新开始。')) {
+                                resetStudyPlan(sentenceId);
+                                const planContent = document.getElementById(`study-plan-${sentenceId}`);
+                                if (planContent) {
+                                    planContent.innerHTML = '<p style="text-align: center; color: #888; padding: 20px;">点击"开始学习"按钮创建复习计划</p>';
+                                }
+                                this.innerHTML = '<i class="fas fa-play-circle"></i> 开始学习';
+                                this.classList.remove('reset-study-btn');
+                                this.classList.add('start-study-btn');
+                                showNotification('学习计划已重置，可以重新开始学习啦！', 'success');
+                            }
+                        }
+                    });
+                }
+                
+                cardsContainer.appendChild(card);
+            });
+        }
+
+        // 以下是其他原有函数的实现
+        function loadWordHighlights() {
+            const saved = localStorage.getItem('wordHighlights');
+            if (saved) {
+                try {
+                    wordHighlights = JSON.parse(saved);
+                } catch (e) {
+                    console.error('加载单词高亮状态失败:', e);
+                    wordHighlights = {};
+                }
+            } else {
+                wordHighlights = {};
+            }
+        }
+
+        function saveWordHighlights() {
+            localStorage.setItem('wordHighlights', JSON.stringify(wordHighlights));
+        }
+
         function renderList() {
             listContainer.innerHTML = '';
             
