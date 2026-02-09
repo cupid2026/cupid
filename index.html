@@ -3876,11 +3876,8 @@
                         </p>
                     </div>
                 `;
-                todayTasksPanel.style.display = 'none';
-            } else {
-                // 显示今日任务列表
-                todayTasksPanel.style.display = 'block';
-                
+                           } else {
+                 
                 // 生成已完成任务部分（如果有）
                 if (completedCount > 0) {
                     tasksHTML += `
@@ -3926,6 +3923,7 @@
             }
             
             todayTasksList.innerHTML = tasksHTML;
+todayTasksPanel.style.display = 'block';
         }
         
         // 处理今日任务按钮点击
